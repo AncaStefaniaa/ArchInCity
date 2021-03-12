@@ -1,0 +1,44 @@
+<ion-content class="speaker-detail">
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/app/tabs/over-time"></ion-back-button>
+      </ion-buttons>
+      <ion-buttons *ngIf="speaker" slot="end">
+        <ion-button (click)="openContact(speaker)">
+          <ion-icon
+            slot="icon-only"
+            ios="call-outline"
+            md="call-sharp"
+          ></ion-icon>
+        </ion-button>
+        <ion-button (click)="openSpeakerShare(speaker)">
+          <ion-icon
+            slot="icon-only"
+            ios="share-outline"
+            md="share-sharp"
+          ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- <div class="speaker-background"> -->
+  <img [src]="speaker?.profilePic" [alt]="speaker?.name" />
+  <h2 class="content-title">{{speaker?.name}}</h2>
+  <!-- </div> -->
+  <div class="ion-padding speaker-detail">
+    <p class="style-details">{{speaker?.about}}</p>
+
+    <hr />
+    <ion-chip
+      class="content-chip"
+      color="dark"
+      button
+      (click)="openExternalUrl('https://en.wikipedia.org/wiki/Achaemenid_architecture')"
+    >
+      <ion-icon name="logo-buffer"></ion-icon>
+      <ion-label>Wikipedia</ion-label>
+    </ion-chip>
+  </div>
+</ion-content>

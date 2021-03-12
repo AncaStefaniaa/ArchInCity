@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Discover</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngIf="!imgSrc">
+    <img src="../../../assets/img/discover/img_take_photo.gif" />
+  </ion-card>
+  <ion-card *ngIf="imgSrc">
+    <img [src]="imgSrc" />
+  </ion-card>
+  <h1 class="content-title">Let's discover arch style</h1>
+  <p class="content-subtitle">
+    Please tap the button below and take a tremendous photo of your building
+  </p>
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="aperture"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button (click)="takePicture()"
+        ><ion-icon name="image"></ion-icon
+      ></ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="end">
+      <ion-fab-button (click)="takePicture()"
+        ><ion-icon name="camera"></ion-icon
+      ></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>
+
+<!-- <ion-content>
+  
+</ion-content> -->
