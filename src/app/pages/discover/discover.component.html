@@ -24,12 +24,14 @@
       <ion-icon name="aperture"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="start">
-      <ion-fab-button (click)="takePicture()"
+      <ion-fab-button
+        (click)="takePicture(this.camera.PictureSourceType.PHOTOLIBRARY)"
         ><ion-icon name="image"></ion-icon
       ></ion-fab-button>
     </ion-fab-list>
     <ion-fab-list side="end">
-      <ion-fab-button (click)="takePicture()"
+      <ion-fab-button
+        (click)="takePicture(this.camera.PictureSourceType.CAMERA)"
         ><ion-icon name="camera"></ion-icon
       ></ion-fab-button>
     </ion-fab-list>
