@@ -34,6 +34,13 @@ const routes: Routes = [
                 (m) => m.DiscoverModule
               ),
           },
+          {
+            path: "discover-details/:discoverId",
+            loadChildren: () =>
+              import("../discover-details/discover-details.module").then(
+                (m) => m.DiscoverDetailsModule
+              ),
+          },
         ],
       },
       {

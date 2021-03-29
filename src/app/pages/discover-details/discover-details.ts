@@ -3,19 +3,20 @@ import { ActivatedRoute } from "@angular/router";
 import { ConferenceData } from "../../providers/conference-data";
 import { ActionSheetController } from "@ionic/angular";
 import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
+import { architecturalStyles } from "../discover/discover.columns";
 
 @Component({
-  selector: "page-speaker-detail",
-  templateUrl: "speaker-detail.html",
-  styleUrls: ["./speaker-detail.scss"],
+  selector: "discover-detail",
+  templateUrl: "./discover-details.html",
+  styleUrls: ["./discover-details.scss"],
 })
-export class SpeakerDetailPage {
+export class DiscoverDetailsPage {
   speaker: any;
   buildings: any[] = [
     {
       about:
         "Achaemenid architecture, that is the buildings created for the Persian king and his court between c. 550 and 330 BC, has a distinctive character. Halls with multiple rows of columns together with arcades on one or three sides are typical. This marks a radical departure from the more than two thousand year oldtraditional architecture of the major ancient Near Easternpowers which consisted of rooms arranged around a series of courtyards. The concept of these columned halls seems to have been adopted from the Medes, the Persians’ predecessors in western Iran.",
-      id: "1",
+      id: "21",
       location: "Near Eastern Archaeology",
       name: "Achaemenid architecture",
       profilePic: "../../../assets/img/architecture/achaemenid.jpg",
@@ -77,11 +78,11 @@ export class SpeakerDetailPage {
   ) {}
 
   ionViewWillEnter() {
+    console.log(architecturalStyles);
     this.dataProvider.load().subscribe((data: any) => {
-      const speakerId = this.route.snapshot.paramMap.get("speakerId");
-      console.log(this.buildings);
-      for (const speaker of this.buildings) {
-        if (speaker && speaker.id === speakerId) {
+      const speakerId = this.route.snapshot.paramMap.get("discoverId");
+      for (const speaker of architecturalStyles) {
+        if (speaker && speaker.id === parseInt(speakerId)) {
           this.speaker = speaker;
           console.log(this.speaker);
           break;

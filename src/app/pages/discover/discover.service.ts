@@ -39,15 +39,10 @@ export class DiscoverService {
     console.log(formData);
     console.log(options);
 
-    this.httpClient
-      .post<any>("http://192.168.1.132:3000/arch_recognition", formData)
-      .subscribe(
-        (res) => console.log(res),
-        (err) => {
-          console.log(err);
-          //   this.presentToast(err);
-        }
-      );
+    return this.httpClient.post<any>(
+      "http://192.168.1.132:3000/arch_recognition",
+      formData
+    );
   }
 
   dataURItoBlob(dataURI) {

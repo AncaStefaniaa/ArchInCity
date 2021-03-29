@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { ConferenceData } from "../../providers/conference-data";
-// import { bla } from "../../../assets/img/architecture/achaemenid.jpg";
+
 @Component({
   selector: "page-speaker-list",
   templateUrl: "speaker-list.html",

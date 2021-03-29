@@ -32,9 +32,9 @@ export class AppComponent implements OnInit {
       icon: "hourglass",
     },
     {
-      title: "My Buildings",
+      title: "Map",
       url: "/app/tabs/map",
-      icon: "business",
+      icon: "map",
     },
     {
       title: "About",
@@ -42,9 +42,9 @@ export class AppComponent implements OnInit {
       icon: "information-circle",
     },
     {
-      title: "Schedule",
+      title: "My Buildings",
       url: "/app/tabs/schedule",
-      icon: "calendar",
+      icon: "business",
     },
   ];
 

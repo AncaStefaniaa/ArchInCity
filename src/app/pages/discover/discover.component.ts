@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ConferenceData } from "../../providers/conference-data";
 import {
   ActionSheetController,
@@ -54,10 +54,15 @@ export class DiscoverPage implements OnInit {
   currPhotoLatitude: number = 0;
   currPhotoLongitude: number = 0;
   coordonates: Coordonates;
+  buildingStyle: any;
+  isScanned: boolean = false;
+  currentArchName: any;
+  currentArchImage: any;
 
   constructor(
     private dataProvider: ConferenceData,
     private route: ActivatedRoute,
+    public router: Router,
     public actionSheetCtrl: ActionSheetController,
     public confData: ConferenceData,
     public inAppBrowser: InAppBrowser,
@@ -75,6 +80,7 @@ export class DiscoverPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.route);
     let options = {
       timeout: 10000,
       enableHighAccuracy: true,
@@ -103,8 +109,6 @@ export class DiscoverPage implements OnInit {
       // console.log(data.coords.latitude);
       // console.log(data.coords.longitude);
     });
-
-    console.log(architecturalStyles);
   }
 
   async presentToast(text) {
@@ -128,7 +132,31 @@ export class DiscoverPage implements OnInit {
     };
 
     this.camera.getPicture(options).then((imageData) => {
-      this.discoverService.findStyle(imageData);
+      this.discoverService.findStyle(imageData).subscribe(
+        (res) => {
+          this.buildingStyle = parseInt(res["arch"]);
+          console.log(parseInt(res["arch"]));
+          console.log(this.buildingStyle);
+          this.populateCurrentBuildingStyle();
+        },
+        (err) => {
+          console.log(err);
+          //   this.presentToast(err);
+        }
+      );
     });
+  }
+
+  populateCurrentBuildingStyle() {
+    this.isScanned = true;
+    console.log(architecturalStyles);
+    console.log(architecturalStyles[this.buildingStyle]);
+    this.currentArchName = architecturalStyles[this.buildingStyle].name;
+    this.currentArchImage = architecturalStyles[this.buildingStyle].image;
+
+    this.router.navigateByUrl(
+      "/app/tabs/discover/discover-details/" +
+        architecturalStyles[this.buildingStyle].id
+    );
   }
 }
