@@ -28,10 +28,12 @@
     "@angular/router": "^8.2.14",
     "@angular/service-worker": "^8.2.14",
     "@capacitor/core": "^2.4.7",
+    "@ionic-native/background-geolocation": "^5.31.1",
     "@ionic-native/camera": "5.0.0-beta.15",
     "@ionic-native/core": "5.0.0-beta.15",
     "@ionic-native/file": "^5.31.1",
     "@ionic-native/file-path": "^5.31.1",
+    "@ionic-native/geolocation": "^5.31.1",
     "@ionic-native/in-app-browser": "5.0.0-beta.15",
     "@ionic-native/ionic-webview": "^5.31.1",
     "@ionic-native/splash-screen": "5.0.0-beta.15",
@@ -69,6 +71,7 @@
     "@angular/language-service": "^8.2.14",
     "@ionic/angular-toolkit": "^2.1.2",
     "@ionic/lab": "^2.0.19",
+    "@mauron85/cordova-plugin-background-geolocation": "^3.1.0",
     "@types/jasmine": "3.4.6",
     "@types/jasminewd2": "2.0.8",
     "@types/node": "^12.12.26",
@@ -106,13 +109,21 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-geolocation": {
-        "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
-      },
+      "cordova-plugin-geolocation": {},
       "cordova-plugin-camera": {},
       "cordova-plugin-file": {},
       "cordova-sqlite-storage": {},
-      "cordova-plugin-filepath": {}
+      "cordova-plugin-filepath": {},
+      "cordova-plugin-background-geolocation": {
+        "GOOGLE_PLAY_SERVICES_VERSION": "11+",
+        "ANDROID_SUPPORT_LIBRARY_VERSION": "26+",
+        "ICON": "@mipmap/icon",
+        "SMALL_ICON": "@mipmap/icon",
+        "ACCOUNT_NAME": "@string/app_name",
+        "ACCOUNT_LABEL": "@string/app_name",
+        "ACCOUNT_TYPE": "$PACKAGE_NAME.account",
+        "CONTENT_AUTHORITY": "$PACKAGE_NAME"
+      }
     }
   }
 }

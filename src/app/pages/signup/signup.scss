@@ -4,10 +4,14 @@
   text-align: center;
 }
 
-.signup-logo img {
-  max-width: 150px;
-}
+// .signup-logo img {
+//   max-width: 150px;
+// }
 
 .list {
   margin-bottom: 0;
+}
+
+ion-content {
+  --ion-background-color: #f5f2ed;
 }

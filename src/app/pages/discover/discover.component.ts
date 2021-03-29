@@ -17,12 +17,30 @@ import {
 import { DomSanitizer } from "@angular/platform-browser";
 import { DiscoverService } from "./discover.service";
 import { File, FileEntry } from "@ionic-native/file/ngx";
-import { WebView } from "@ionic-native/ionic-webview/ngx";
-import { SQLite, SQLiteObject } from "@ionic-native/sqlite/ngx";
-import { Storage } from "@ionic/storage";
 import { FilePath } from "@ionic-native/file-path/ngx";
 
+import {
+  Geolocation,
+  Geoposition,
+  GeolocationOptions,
+} from "@ionic-native/geolocation/ngx";
+
+import {
+  BackgroundGeolocation,
+  BackgroundGeolocationResponse,
+  BackgroundGeolocationConfig,
+} from "@ionic-native/background-geolocation/ngx";
+
+import { architecturalStyles } from "./discover.columns";
+
 const STORAGE_KEY = "my_images";
+
+interface Coordonates {
+  lat: number;
+  lng: number;
+  center: boolean;
+}
+
 @Component({
   selector: "app-discover",
   templateUrl: "discover.component.html",
@@ -33,6 +51,9 @@ export class DiscoverPage implements OnInit {
   imageSrc: any;
   formData: any;
   images = [];
+  currPhotoLatitude: number = 0;
+  currPhotoLongitude: number = 0;
+  coordonates: Coordonates;
 
   constructor(
     private dataProvider: ConferenceData,
@@ -45,44 +66,45 @@ export class DiscoverPage implements OnInit {
     public domSanitizer: DomSanitizer,
     private discoverService: DiscoverService,
     private file: File,
-    private webview: WebView,
-    private sqlite: SQLite,
     private ref: ChangeDetectorRef,
     private toastController: ToastController,
-    private storage: Storage,
     private platform: Platform,
-    private filePath: FilePath
+    private filePath: FilePath,
+    private geolocation: Geolocation,
+    private backgroundGeolocation: BackgroundGeolocation
   ) {}
 
   ngOnInit() {
-    this.platform.ready().then(() => {
-      this.loadStoredImages();
-    });
-  }
+    let options = {
+      timeout: 10000,
+      enableHighAccuracy: true,
+    };
+    this.geolocation
+      .getCurrentPosition(options)
+      .then((resp) => {
+        this.currPhotoLatitude = resp.coords.latitude;
+        this.currPhotoLongitude = resp.coords.longitude;
+        const coordonates: Coordonates = {
+          lat: resp.coords.latitude,
+          lng: resp.coords.longitude,
+          center: true,
+        };
+        localStorage.setItem("coordonates", JSON.stringify(coordonates));
+      })
+      .catch((error) => {
+        console.log("Error getting location", error);
+      });
 
-  loadStoredImages() {
-    this.storage.get(STORAGE_KEY).then((images) => {
-      console.log("*****");
-      if (images) {
-        console.log("3333");
-        let arr = JSON.parse(images);
-        this.images = [];
-        for (let img of arr) {
-          let filePath = this.file.dataDirectory + img;
-          let resPath = this.pathForImage(filePath);
-          this.images.push({ name: img, path: resPath, filePath: filePath });
-        }
-      }
+    let watch = this.geolocation.watchPosition();
+    watch.subscribe((data) => {
+      // data can be a set of coordinates, or an error (if an error occurred).
+      // data.coords.latitude
+      // data.coords.longitude
+      // console.log(data.coords.latitude);
+      // console.log(data.coords.longitude);
     });
-  }
 
-  pathForImage(img) {
-    if (img === null) {
-      return "";
-    } else {
-      let converted = this.webview.convertFileSrc(img);
-      return converted;
-    }
+    console.log(architecturalStyles);
   }
 
   async presentToast(text) {
@@ -106,119 +128,7 @@ export class DiscoverPage implements OnInit {
     };
 
     this.camera.getPicture(options).then((imageData) => {
-      // this.imgData = this.domSanitizer.bypassSecurityTrustResourceUrl(
-      //   "data:image/jpeg;base64," + imagePath
-      // );
-
-      // if (
-      //   this.platform.is("android") &&
-      //   sourceType === this.camera.PictureSourceType.PHOTOLIBRARY
-      // ) {
-      //   this.filePath.resolveNativePath(imagePath).then((filePath) => {
-      //     let correctPath = filePath.substr(0, filePath.lastIndexOf("/") + 1);
-      //     let currentName = imagePath.substring(
-      //       imagePath.lastIndexOf("/") + 1,
-      //       imagePath.lastIndexOf("?")
-      //     );
-      //     // this.copyFileToLocalDir(
-      //     //   correctPath,
-      //     //   currentName,
-      //     //   this.createFileName()
-      //     // );
-      //   });
-      // } else {
-      //   var currentName = imagePath.substr(imagePath.lastIndexOf("/") + 1);
-      //   var correctPath = imagePath.substr(0, imagePath.lastIndexOf("/") + 1);
-      //   console.log("currName = ", currentName);
-      //   console.log("correctPath = ", correctPath);
-      //   this.copyFileToLocalDir(
-      //     correctPath,
-      //     currentName,
-      //     this.createFileName()
-      //   );
-      // }
-      // const formData = new FormData();
-      // formData.append("input", this.imgSrc);
-
       this.discoverService.findStyle(imageData);
-    });
-  }
-
-  createFileName() {
-    var d = new Date(),
-      n = d.getTime(),
-      newFileName = n + ".jpg";
-    console.log(newFileName);
-    return newFileName;
-  }
-
-  copyFileToLocalDir(namePath, currentName, newFileName) {
-    console.log("------------copyFileToLocalDir----------------");
-    console.log(namePath);
-    console.log(currentName);
-    console.log(this.file.dataDirectory);
-    console.log(newFileName);
-    // let dataDirectory = "filesystem:file:///C:/temp/";
-
-    this.file
-      .resolveLocalFilesystemUrl(namePath + "/" + currentName)
-      .then((entry) => {
-        (<FileEntry>entry).file((file) => this.readFile(file));
-      })
-      .catch((err) => {
-        console.log(err);
-        this.presentToast("Error while reading file");
-      });
-
-    // this.file
-    //   .copyFile(namePath, currentName, this.file.dataDirectory, newFileName)
-    //   .then(
-    //     (success) => {
-    //       this.updateStoredImages(newFileName);
-    //     },
-    //     (error) => {
-    //       console.log(error);
-    //       this.presentToast("Error while storing file.");
-    //     }
-    //   );
-  }
-
-  readFile(file: any) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const formData = new FormData();
-      const imgBlob = new Blob([reader.result], {
-        type: file.type,
-      });
-      formData.append("file", imgBlob, file.name);
-      console.log(formData);
-    };
-
-    reader.readAsArrayBuffer(file);
-  }
-
-  updateStoredImages(name) {
-    this.storage.get(STORAGE_KEY).then((images) => {
-      let arr = JSON.parse(images);
-      if (!arr) {
-        let newImages = [name];
-        this.storage.set(STORAGE_KEY, JSON.stringify(newImages));
-      } else {
-        arr.push(name);
-        this.storage.set(STORAGE_KEY, JSON.stringify(arr));
-      }
-
-      let filePath = this.file.dataDirectory + name;
-      let resPath = this.pathForImage(filePath);
-
-      let newEntry = {
-        name: name,
-        path: resPath,
-        filePath: filePath,
-      };
-
-      this.images = [newEntry, ...this.images];
-      this.ref.detectChanges(); // trigger change detection cycle
     });
   }
 }

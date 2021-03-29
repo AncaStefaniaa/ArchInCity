@@ -1,26 +1,7 @@
-/*
- * Ionic Variables and Theming
- * ----------------------------------------------------------------------------
- * For more information, please see
- * https://www.ionicframework.com/docs/theming/
- */
-
-/*
- * Ionic Colors
- * ----------------------------------------------------------------------------
- * Named colors make it easy to reuse colors on various components.
- * It's highly recommended to change the default colors
- * to match your app's branding. Ionic provides nine layered colors
- * that can be changed to theme an app. Additional colors can be
- * added as well (see below). For more information, please see
- * https://www.ionicframework.com/docs/theming/colors
- *
- * To easily create custom color palettes for your app’s UI,
- * check out our color generator:
- * https://www.ionicframework.com/docs/theming/color-generator
- */
-
 :root {
+  /** background**/
+  --ion-background-color-2: #f5f2ed;
+
   /** primary **/
   --ion-color-primary: #59253a;
   --ion-color-primary-rgb: 56, 128, 255;
