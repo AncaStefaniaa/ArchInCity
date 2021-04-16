@@ -13,14 +13,9 @@ export class SignUpService {
   ) {}
 
   signUpUser(formData) {
-    this.httpClient
-      .post<any>("http://192.168.1.132:3000/register", formData)
-      .subscribe(
-        (res) => console.log(res),
-        (err) => {
-          console.log(err);
-          //   this.presentToast(err);
-        }
-      );
+    return this.httpClient.post<any>(
+      "http://192.168.1.133:3000/register",
+      formData
+    );
   }
 }

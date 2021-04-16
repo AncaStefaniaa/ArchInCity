@@ -10,6 +10,7 @@
             *ngFor="let p of appPages; let i = index"
           >
             <ion-item
+              *ngIf="p.visible || loggedIn"
               [routerLink]="p.url"
               routerLinkActive="selected"
               routerDirection="root"

@@ -40,7 +40,7 @@ export class DiscoverService {
     console.log(options);
 
     return this.httpClient.post<any>(
-      "http://192.168.1.132:3000/arch_recognition",
+      "http://192.168.1.133:3000/arch_recognition",
       formData
     );
   }

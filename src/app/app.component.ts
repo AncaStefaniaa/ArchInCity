@@ -25,26 +25,31 @@ export class AppComponent implements OnInit {
       title: "Discover",
       url: "/app/tabs/discover",
       icon: "globe",
+      visible: false,
     },
     {
       title: "Architecture over time",
       url: "/app/tabs/over-time",
       icon: "hourglass",
+      visible: true,
     },
     {
       title: "Map",
       url: "/app/tabs/map",
       icon: "map",
+      visible: true,
     },
     {
       title: "About",
       url: "/app/tabs/about",
       icon: "information-circle",
+      visible:true,
     },
     {
       title: "My Buildings",
       url: "/app/tabs/schedule",
       icon: "business",
+      visible:false,
     },
   ];
 

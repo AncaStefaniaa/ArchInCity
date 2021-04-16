@@ -7,6 +7,9 @@ import { UserData } from "../../providers/user-data";
 import { UserOptions, UserLogin } from "../../interfaces/user-options";
 
 import { LogInService } from "./login.service";
+
+import { ToastController } from "@ionic/angular";
+
 @Component({
   selector: "page-login",
   templateUrl: "login.html",
@@ -19,15 +22,63 @@ export class LoginPage {
   constructor(
     public userData: UserData,
     public router: Router,
-    private logInService: LogInService
+    private logInService: LogInService,
+    private toastController: ToastController
   ) {}
+
+  async presentErrorToast(text) {
+    const toast = await this.toastController.create({
+      message: text,
+      position: "bottom",
+      duration: 3000,
+      color: "danger",
+      buttons: [
+        {
+          side: "start",
+          icon: "bug",
+          handler: () => {
+            console.log("Bug clicked");
+          },
+        },
+      ],
+    });
+    toast.present();
+  }
+
+  async presentSuccessToast(text) {
+    const toast = await this.toastController.create({
+      message: text,
+      position: "bottom",
+      duration: 3000,
+      color: "success",
+      buttons: [
+        {
+          side: "start",
+          icon: "star",
+          handler: () => {
+            console.log("Star clicked");
+          },
+        },
+      ],
+    });
+    toast.present();
+  }
 
   onLogin(form: NgForm) {
     this.submitted = true;
-    this.logInService.logInUser(this.login);
     if (form.valid) {
-      this.userData.login(this.login.email);
-      this.router.navigateByUrl("/app/tabs/schedule");
+      this.logInService.logInUser(this.login).subscribe(
+        (res) => {
+          console.log(res);
+          this.presentSuccessToast("You have successfully logged in");
+          this.userData.login(this.login.email);
+          this.router.navigateByUrl("/app/tabs/schedule");
+        },
+        (err) => {
+          console.log(err);
+          this.presentErrorToast(err.error);
+        }
+      );
     }
   }
 

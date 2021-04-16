@@ -1,6 +1,6 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="discover">
+    <ion-tab-button *ngIf="loggedIn" tab="discover">
       <ion-icon name="globe"></ion-icon>
       <ion-label>Discover</ion-label>
     </ion-tab-button>
@@ -10,7 +10,7 @@
       <ion-label>Time</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="map">
+    <ion-tab-button *ngIf="loggedIn" tab="map">
       <ion-icon name="map"></ion-icon>
       <ion-label>Map</ion-label>
     </ion-tab-button>

@@ -30,7 +30,10 @@
       </ion-item>
 
       <ion-text color="danger">
-        <p [hidden]="submitted == false" class="ion-padding-start">
+        <p
+          [hidden]="login.email || submitted == false"
+          class="ion-padding-start"
+        >
           Email is required
         </p>
       </ion-text>

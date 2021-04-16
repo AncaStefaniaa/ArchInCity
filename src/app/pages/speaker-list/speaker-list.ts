@@ -15,7 +15,7 @@ export class SpeakerListPage {
       id: "1",
       location: "Near Eastern Archaeology",
       name: "Achaemenid architecture",
-      profilePic: "../../../assets/img/architecture/achaemenid.jpg",
+      image: "../../../assets/img/architecture/achaemenid.jpg",
       title:
         "Elements of Assyrian, Egyptian, Median and Asiatic Greek all incorporated",
       wikipedia: "https://en.wikipedia.org/wiki/Baroque_architecture",
@@ -26,7 +26,7 @@ export class SpeakerListPage {
       id: "2",
       location: "United States in Boston in the 1890s.",
       name: "American Craftsman",
-      profilePic: "../../../assets/img/architecture/american-craftsman.jpg",
+      image: "../../../assets/img/architecture/american-craftsman.jpg",
       title: "United States in Boston in the 1890s.",
       wikipedia: "https://en.wikipedia.org/wiki/Baroque_architecture",
     },
@@ -36,7 +36,7 @@ export class SpeakerListPage {
       id: "3",
       location: "France just before World War I",
       name: "Art Deco",
-      profilePic: "../../../assets/img/architecture/art-deco.jpg",
+      image: "../../../assets/img/architecture/art-deco.jpg",
       title: "France just before World War I",
       wikipedia: "https://en.wikipedia.org/wiki/Art_Deco",
     },
@@ -46,7 +46,7 @@ export class SpeakerListPage {
       id: "4",
       location: "Germany, Austria, Spain and Italy",
       name: "Art Nouveau",
-      profilePic: "../../../assets/img/architecture/art-nouveau.jpg",
+      image: "../../../assets/img/architecture/art-nouveau.jpg",
       title: "Germany, Austria, Spain and Italy",
       wikipedia: "https://en.wikipedia.org/wiki/Art_Nouveau",
     },
@@ -57,12 +57,94 @@ export class SpeakerListPage {
       location:
         "developed in the Counter-Reformation period, when the Catholic Church needed to reassert its waning influence across Europe in the face of the Protestant Reformation",
       name: "Baroque",
-      profilePic: "../../../assets/img/architecture/baroque.jpg",
+      image: "../../../assets/img/architecture/baroque.jpg",
       title:
         "developed in the Counter-Reformation period, when the Catholic Church needed to reassert its waning influence across Europe in the face of the Protestant Reformation",
       style:
         "Baroque architecture is characterised by dynamic designs and complex architectural plan forms; intended to heighten feelings of motion and sensuality, and frequently based on the oval. There is often a mixture of the repetition, break-up and distortion of Renaissance classical motifs.",
       wikipedia: "https://en.wikipedia.org/wiki/Baroque_architecture",
+    },
+    {
+      name: "Bauhaus",
+      id: 7,
+      about:
+        "The Bauhaus was founded by architect Walter Gropius in Weimar. It was grounded in the idea of creating a Gesamtkunstwerk ('comprehensive artwork') in which all the arts would eventually be brought together. The Bauhaus style later became one of the most influential currents in modern design, modernist architecture and art, design, and architectural education.[2] The Bauhaus movement had a profound influence upon subsequent developments in art, architecture, graphic design, interior design, industrial design, and typography. Staff at the Bauhaus included prominent artists such as Paul Klee, Wassily Kandinsky, and László Moholy-Nagy at various points.",
+      origins: ["from 1919 to 1933", "Germany"],
+      characteristics: [
+        "combined crafts and the fine arts",
+        "comprehensive artwork",
+      ],
+      wikipedia: "https://en.wikipedia.org/wiki/Bauhaus",
+      image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/6265_Dessau.JPG/375px-6265_Dessau.JPG",
+    },
+    {
+      name: "Beaux-Arts",
+      id: 8,
+      about:
+        "Beaux-Arts architecture was the academic architectural style taught at the École des Beaux-Arts in Paris, particularly from the 1830s to the end of the 19th century. It drew upon the principles of French neoclassicism, but also incorporated Gothic and Renaissance elements, and used modern materials, such as iron and glass. It was an important style in France until the end of the 19th century. It also had a strong influence on architecture in the United States because of the many prominent American architects who studied at the École des Beaux-Arts, including Henry Hobson Richardson, John Galen Howard, Daniel Burnham, and Louis Sullivan.",
+      origins: ["from the 1830s to the end of the 19th century.", "Paris"],
+      characteristics: ["Modern materials", "Classical details", "Flat roof"],
+      wikipedia: "https://en.wikipedia.org/wiki/Beaux-Arts_architecture",
+      image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Paris_6_-_ENSBA_01.jpg/450px-Paris_6_-_ENSBA_01.jpg",
+    },
+    {
+      name: "Byzantine",
+      id: 9,
+      about:
+        "The Byzantine era is usually dated from 330 AD, when Constantine the Great moved the Roman capital to Byzantium, which became Constantinople, until the fall of the Byzantine Empire in 1453. However, there was initially no hard line between the Byzantine and Roman empires, and early Byzantine architecture is stylistically and structurally indistinguishable from earlier Roman architecture. This terminology was introduced by modern historians to designate the medieval Roman Empire as it evolved as a distinct artistic and cultural entity centered on the new capital of Constantinople (modern-day Istanbul) rather than the city of Rome and its environs.",
+      origins: ["330 AD", "Constantinople"],
+      characteristics: ["Exotic domes", "Ever-richer mosaics", "Flat roof"],
+      wikipedia: "https://en.wikipedia.org/wiki/Byzantine_architecture",
+      image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Fethiye_Museum_9625.jpg/420px-Fethiye_Museum_9625.jpg",
+    },
+    {
+      name: "Chicago school",
+      id: 10,
+      about:
+        "Chicago's architecture is famous throughout the world and one style is referred to as the Chicago School. Much of its early work is also known as Commercial style.[1] In the history of architecture, the first Chicago School was a school of architects active in Chicago at the turn of the 20th century. They were among the first to promote the new technologies of steel-frame construction in commercial buildings, and developed a spatial aesthetic which co-evolved with, and then came to influence, parallel developments in European Modernism. A 'Second Chicago School' with a modernist aesthetic emerged in the 1940s through 1970s, which pioneered new building technologies and structural systems, such as the tube-frame structure.",
+      origins: ["20th century", "Chicago"],
+      characteristics: [
+        "bundled tube structural",
+        "the world's tallest buildings",
+      ],
+      wikipedia: "https://en.wikipedia.org/wiki/Chicago_school_(architecture)",
+      image:
+        "https://cdn.skyrisecities.com/sites/default/files/images/articles/2016/05/20957/20957-71905.jpg",
+    },
+
+    {
+      name: "Colonial",
+      id: 11,
+      about:
+        "Colonial architecture is an architectural style from a mother country that has been incorporated into the buildings of settlements or colonies in distant locations. Colonists frequently built settlements that synthesized the architecture of their countries of origin with the design characteristics of their new lands, creating hybrid designs.",
+      origins: ["Dutch Colonial", "French Colonial", "American colonial"],
+      characteristics: [
+        "Dutch Colonial",
+        "French Colonial",
+        "American colonial",
+      ],
+      wikipedia:
+        "https://en.wikipedia.org/wiki/Colonial_architecture#:~:text=Colonial%20architecture%20is%20an%20architectural,or%20colonies%20in%20distant%20locations.",
+      image:
+        "https://www.nomadepicureans.com/wp-content/uploads/2018/11/colonial-architecture.jpg",
+    },
+    {
+      name: "Deconstructivism",
+      id: 12,
+      about:
+        "Deconstructivism is, in fact, not a new architecture style, nor is it an avant-garde movement against architecture or society. It does not follow “rules” or acquire specific aesthetics, nor is it a rebellion against a social dilemma. It is the unleashing of infinite possibilities of playing around with forms and volumes.",
+      origins: ["1980s", "New York"],
+      characteristics: [
+        "absence of obvious harmony",
+        "Contemporary art",
+        "Smooth exterior surfaces",
+      ],
+      wikipedia: "https://en.wikipedia.org/wiki/Deconstructivism",
+      image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Image-Disney_Concert_Hall_by_Carol_Highsmith_edit-2.jpg/1151px-Image-Disney_Concert_Hall_by_Carol_Highsmith_edit-2.jpg",
     },
   ];
   constructor(public confData: ConferenceData) {}

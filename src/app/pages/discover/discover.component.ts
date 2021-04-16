@@ -25,14 +25,14 @@ import {
   GeolocationOptions,
 } from "@ionic-native/geolocation/ngx";
 
-import {
-  BackgroundGeolocation,
-  BackgroundGeolocationResponse,
-  BackgroundGeolocationConfig,
-} from "@ionic-native/background-geolocation/ngx";
+// import {
+//   BackgroundGeolocation,
+//   BackgroundGeolocationResponse,
+//   BackgroundGeolocationConfig,
+// } from "@ionic-native/background-geolocation/ngx";
 
 import { architecturalStyles } from "./discover.columns";
-
+import { UserData } from "../../providers/user-data";
 const STORAGE_KEY = "my_images";
 
 interface Coordonates {
@@ -75,9 +75,9 @@ export class DiscoverPage implements OnInit {
     private toastController: ToastController,
     private platform: Platform,
     private filePath: FilePath,
-    private geolocation: Geolocation,
-    private backgroundGeolocation: BackgroundGeolocation
-  ) {}
+    private geolocation: Geolocation
+  ) // private backgroundGeolocation: BackgroundGeolocation
+  {}
 
   ngOnInit() {
     console.log(this.route);

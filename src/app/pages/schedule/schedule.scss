@@ -15,20 +15,20 @@ ion-fab-button {
 }
 
 $categories: (
-  ionic: var(--ion-color-primary),
-  angular: #ac282b,
-  communication: #8e8d93,
-  tooling: #fe4c52,
-  services: #fd8b2d,
-  design: #fed035,
-  workshop: #69bb7b,
-  food: #3bc7c4,
-  documentation: #b16be3,
-  navigation: #6600cc
+  0: #b16be3,
+  1: #ac282b,
+  2: #8e8d93,
+  3: #fe4c52,
+  4: #fd8b2d,
+  5: #fed035,
+  6: #69bb7b,
+  7: #3bc7c4,
+  8: #b16be3,
+  9: #6600cc,
 );
 
 @each $track, $value in map-remove($categories) {
-  ion-item-sliding[track='#{$track}'] ion-label {
+  ion-item-sliding[track="#{$track}"] ion-label {
     border-left: 2px solid $value;
     padding-left: 10px;
   }
