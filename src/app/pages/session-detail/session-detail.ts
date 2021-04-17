@@ -1,33 +1,41 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { ConferenceData } from '../../providers/conference-data';
-import { ActivatedRoute } from '@angular/router';
-import { UserData } from '../../providers/user-data';
-import {myBuildings} from '../schedule/gallery.columns'
+import { ConferenceData } from "../../providers/conference-data";
+import { ActivatedRoute } from "@angular/router";
+import { UserData } from "../../providers/user-data";
+import { myBuildings } from "../schedule/gallery.columns";
 
 @Component({
-  selector: 'page-session-detail',
-  styleUrls: ['./session-detail.scss'],
-  templateUrl: 'session-detail.html'
+  selector: "page-session-detail",
+  styleUrls: ["./session-detail.scss"],
+  templateUrl: "session-detail.html",
 })
 export class SessionDetailPage {
   session: any;
   isFavorite = false;
-  defaultHref = '';
+  defaultHref = "";
 
   constructor(
     private dataProvider: ConferenceData,
     private userProvider: UserData,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ionViewWillEnter() {
     this.dataProvider.load().subscribe((data: any) => {
-      if (data && data.schedule && data.schedule[0] && data.schedule[0].groups) {
-        const sessionId = this.route.snapshot.paramMap.get('sessionId');
+      console.log(data);
+      if (
+        data &&
+        data.schedule &&
+        data.schedule[0] &&
+        data.schedule[0].groups
+      ) {
+        const sessionId = this.route.snapshot.paramMap.get("sessionId");
         for (const group of data.schedule[0].groups) {
           if (group && group.sessions) {
             for (const session of group.sessions) {
+              console.log(session);
+               console.log(sessionId);
               if (session && session.id === sessionId) {
                 this.session = session;
 
@@ -49,10 +57,11 @@ export class SessionDetailPage {
   }
 
   sessionClick(item: string) {
-    console.log('Clicked', item);
+    console.log("Clicked", item);
   }
 
   toggleFavorite() {
+    console.log(this.session);
     if (this.userProvider.hasFavorite(this.session.name)) {
       this.userProvider.removeFavorite(this.session.name);
       this.isFavorite = false;
@@ -63,6 +72,6 @@ export class SessionDetailPage {
   }
 
   shareSession() {
-    console.log('Clicked share session');
+    console.log("Clicked share session");
   }
 }

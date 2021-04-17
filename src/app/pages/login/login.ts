@@ -72,6 +72,7 @@ export class LoginPage {
           console.log(res);
           this.presentSuccessToast("You have successfully logged in");
           this.userData.login(this.login.email);
+          this.userData.saveToLocalStorage(this.login.email, res.result);
           this.router.navigateByUrl("/app/tabs/schedule");
         },
         (err) => {

@@ -29,15 +29,10 @@ export class DiscoverService {
     const imageBlob = this.dataURItoBlob(imageData);
     const imageFile = new File([imageBlob], imageName, { type: "image/jpeg" });
 
-    console.log(imageFile);
-
     let formData = new FormData();
     formData.append("file", imageBlob, imageName);
 
     var options = { content: formData };
-
-    console.log(formData);
-    console.log(options);
 
     return this.httpClient.post<any>(
       "http://192.168.1.133:3000/arch_recognition",
@@ -49,12 +44,45 @@ export class DiscoverService {
     const byteString = window.atob(dataURI);
     const arrayBuffer = new ArrayBuffer(byteString.length);
     const int8Array = new Uint8Array(arrayBuffer);
+
     for (let i = 0; i < byteString.length; i++) {
       int8Array[i] = byteString.charCodeAt(i);
     }
 
     const blob = new Blob([int8Array], { type: "image/jpeg" });
-    console.log("blob:", blob);
+
     return blob;
+  }
+
+  sendImageUser(imageData, style, latitude, longitude) {
+    const date = new Date().valueOf();
+    const imageName = date + ".jpeg";
+
+    const imageBlob = this.dataURItoBlob(imageData);
+    const imageFile = new File([imageBlob], imageName, {
+      type: "image/jpeg",
+    });
+
+    console.log(JSON.parse(localStorage.getItem("userData")));
+    const userData = JSON.parse(localStorage.getItem("userData"));
+
+    let formData = new FormData();
+
+    console.log()
+    formData.append("file", imageBlob, imageName);
+    formData.append("userId", userData.userId);
+    formData.append("latitude", latitude);
+    formData.append("longitude", longitude);
+    formData.append("style", style);
+
+    var options = { content: formData };
+
+    console.log(options);
+    console.log(formData);
+
+    return this.httpClient.post<any>(
+      "http://192.168.1.133:3000/add_image",
+      formData
+    );
   }
 }

@@ -11,3 +11,11 @@
     margin-top: 50px !important;
   }
 }
+
+.my-custom-class {
+  border-radius: 7px;
+  background-color: #59253a;
+  --background: #59253a;
+  --spinner-color: #fff;
+  color: white;
+}

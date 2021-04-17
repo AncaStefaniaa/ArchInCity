@@ -7,7 +7,7 @@ import {
   Platform,
 } from "@ionic/angular";
 import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
-import { PhotoService } from "../../services/photo.service";
+// import { PhotoService } from "../../services/photo.service";
 import { defineCustomElements } from "@ionic/pwa-elements/loader";
 import {
   Camera,
@@ -25,6 +25,7 @@ import {
   GeolocationOptions,
 } from "@ionic-native/geolocation/ngx";
 
+import { LoadingController } from "@ionic/angular";
 // import {
 //   BackgroundGeolocation,
 //   BackgroundGeolocationResponse,
@@ -66,7 +67,6 @@ export class DiscoverPage implements OnInit {
     public actionSheetCtrl: ActionSheetController,
     public confData: ConferenceData,
     public inAppBrowser: InAppBrowser,
-    public photoService: PhotoService,
     public camera: Camera,
     public domSanitizer: DomSanitizer,
     private discoverService: DiscoverService,
@@ -75,12 +75,11 @@ export class DiscoverPage implements OnInit {
     private toastController: ToastController,
     private platform: Platform,
     private filePath: FilePath,
-    private geolocation: Geolocation
-  ) // private backgroundGeolocation: BackgroundGeolocation
-  {}
+    private geolocation: Geolocation,
+    public loadingController: LoadingController // private backgroundGeolocation: BackgroundGeolocation
+  ) {}
 
   ngOnInit() {
-    console.log(this.route);
     let options = {
       timeout: 10000,
       enableHighAccuracy: true,
@@ -120,6 +119,18 @@ export class DiscoverPage implements OnInit {
     toast.present();
   }
 
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: "my-custom-class",
+      message: "Please wait...",
+      duration: 3000,
+      translucent: true,
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+  }
+
   takePicture(sourceType: PictureSourceType) {
     const options: CameraOptions = {
       quality: 100,
@@ -134,14 +145,32 @@ export class DiscoverPage implements OnInit {
     this.camera.getPicture(options).then((imageData) => {
       this.discoverService.findStyle(imageData).subscribe(
         (res) => {
+          this.presentLoading();
           this.buildingStyle = parseInt(res["arch"]);
-          console.log(parseInt(res["arch"]));
-          console.log(this.buildingStyle);
-          this.populateCurrentBuildingStyle();
+
+          this.discoverService
+            .sendImageUser(
+              imageData,
+              this.buildingStyle,
+              this.currPhotoLatitude,
+              this.currPhotoLongitude
+            )
+            .subscribe(
+              (res) => {
+                console.log(res);
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+
+          setTimeout(() => {
+            this.populateCurrentBuildingStyle();
+          }, 3000);
         },
         (err) => {
           console.log(err);
-          //   this.presentToast(err);
+          this.presentToast(err);
         }
       );
     });
@@ -149,8 +178,7 @@ export class DiscoverPage implements OnInit {
 
   populateCurrentBuildingStyle() {
     this.isScanned = true;
-    console.log(architecturalStyles);
-    console.log(architecturalStyles[this.buildingStyle]);
+
     this.currentArchName = architecturalStyles[this.buildingStyle].name;
     this.currentArchImage = architecturalStyles[this.buildingStyle].image;
 
