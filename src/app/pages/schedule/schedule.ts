@@ -16,6 +16,8 @@ import { UserData } from "../../providers/user-data";
 import { architecturalStyles } from "../discover/discover.columns";
 import { myBuildings } from "./gallery.columns";
 import { GalleryService } from "./gallery.service";
+import { levenshtein } from "fast-levenshtein";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "page-schedule",
@@ -38,7 +40,9 @@ export class SchedulePage implements OnInit {
   userData: any;
   image: any;
   architecturalStyles: any;
-
+  flag: number = 0;
+  backupData: any;
+  distance$: Observable<number>;
   constructor(
     public alertCtrl: AlertController,
     public confData: ConferenceData,
@@ -53,31 +57,63 @@ export class SchedulePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.updateSchedule();
+    this.updateSchedule(false);
     this.architecturalStyles = architecturalStyles;
     this.ios = this.config.get("mode") === "ios";
+    console.log(this.levenshtein("book", "bllk"));
   }
 
   ionViewWillEnter() {
     this.galleryService.getAllImages().subscribe((res) => {
       this.userData = res["result"];
+
       this.userData = this.buildJson(this.userData);
 
+      this.flag = 1;
       this.userData.forEach((element) => {
+        element["longName"] = this.architecturalStyles[
+          parseInt(element.name)
+        ].name;
+        element["favorite"] = false;
         element.buildings.forEach((build) => {
-          build["country"] = "bla";
+          let splitAddress = build.address.split(",");
+          build["country"] = splitAddress[splitAddress.length - 1];
+          this.architecturalStyles[parseInt(build.style)].name;
         });
       });
+
+      this.userData[2].favorite = true;
+
+      this.backupData = this.userData;
     });
 
     this.shownSessions = 3;
     this.groups = myBuildings;
   }
 
-  updateSchedule() {
+  updateSchedule(isFavoritesTab: boolean) {
     // Close any open sliding items when the schedule updates
     if (this.scheduleList) {
       this.scheduleList.closeSlidingItems();
+    }
+    console.log(isFavoritesTab);
+    if (this.flag) {
+      if (!isFavoritesTab || this.segment == "all") {
+        this.userData = this.backupData.filter((element) => {
+          if (element.longName) {
+            let longNameLow = element.longName.toLowerCase();
+            let queryTextLow = this.queryText.toLowerCase();
+
+            return longNameLow.includes(queryTextLow);
+          }
+        });
+      } else if (isFavoritesTab) {
+        this.userData = this.backupData.filter((element) => {
+          if (element.favorite == true) {
+            return 1;
+          }
+        });
+      }
     }
   }
 
@@ -178,7 +214,7 @@ export class SchedulePage implements OnInit {
           handler: () => {
             // they want to remove this session from their favorites
             this.user.removeFavorite(sessionData.name);
-            this.updateSchedule();
+            this.updateSchedule(true);
 
             // close the sliding item and hide the option buttons
             slidingItem.close();
@@ -199,4 +235,24 @@ export class SchedulePage implements OnInit {
     await loading.onWillDismiss();
     fab.close();
   }
+
+  levenshtein = (a: string, b: string): number => {
+    const matrix = Array.from({ length: a.length }).map(() =>
+      Array.from({ length: b.length }).map(() => 0)
+    );
+
+    for (let i = 0; i < a.length; i++) matrix[i][0] = i;
+
+    for (let i = 0; i < b.length; i++) matrix[0][i] = i;
+
+    for (let j = 0; j < b.length; j++)
+      for (let i = 0; i < a.length; i++)
+        matrix[i][j] = Math.min(
+          (i == 0 ? 0 : matrix[i - 1][j]) + 1,
+          (j == 0 ? 0 : matrix[i][j - 1]) + 1,
+          (i == 0 || j == 0 ? 0 : matrix[i - 1][j - 1]) + (a[i] == b[j] ? 0 : 1)
+        );
+
+    return matrix[a.length - 1][b.length - 1];
+  };
 }

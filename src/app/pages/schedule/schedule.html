@@ -7,7 +7,7 @@
     <ion-segment
       *ngIf="ios"
       [(ngModel)]="segment"
-      (ionChange)="updateSchedule()"
+      (ionChange)="updateSchedule(true)"
     >
       <ion-segment-button value="all"> All </ion-segment-button>
       <ion-segment-button value="favorites"> Favorites </ion-segment-button>
@@ -17,7 +17,7 @@
       *ngIf="showSearchbar"
       showCancelButton="always"
       [(ngModel)]="queryText"
-      (ionChange)="updateSchedule()"
+      (ionChange)="updateSchedule(false)"
       (ionCancel)="showSearchbar = false"
       placeholder="Search"
     ></ion-searchbar>
@@ -34,7 +34,7 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-toolbar *ngIf="!ios">
-    <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
+    <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule(true)">
       <ion-segment-button value="all"> All </ion-segment-button>
       <ion-segment-button value="favorites"> Favorites </ion-segment-button>
     </ion-segment>
@@ -49,7 +49,7 @@
     <ion-toolbar>
       <ion-searchbar
         [(ngModel)]="queryText"
-        (ionChange)="updateSchedule()"
+        (ionChange)="updateSchedule(false)"
         placeholder="Search"
       ></ion-searchbar>
     </ion-toolbar>
@@ -76,14 +76,13 @@
             />
           </ion-thumbnail>
           <ion-label class="my-building-details">
-          
-             <ion-chip>
-            <ion-icon name="navigate"> </ion-icon>
-             <ion-label >{{build.address}}</ion-label>
+            <ion-chip>
+              <ion-icon name="navigate"> </ion-icon>
+              <ion-label>{{build.country}}</ion-label>
             </ion-chip>
             <ion-chip>
               <ion-icon name="calendar" color="dark"></ion-icon>
-               <ion-label >{{build.datetime}}</ion-label>
+              <ion-label>{{build.datetime}}</ion-label>
             </ion-chip>
           </ion-label>
         </ion-item>

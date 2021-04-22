@@ -183,7 +183,13 @@ export const architecturalStyles: any[] = [
     image:
       "https://cdn.shopify.com/s/files/1/0290/1369/articles/DSC_0281.jpg_5c93b8cb-ded7-4fd9-b53b-5866dccab393_1400x.jpg?v=1591285455",
   },
-  { name: "Georgian", id: 14 },
+  {
+    name: "Georgian",
+    id: 14,
+    about:
+      "Georgian architecture is the name given in most English-speaking countries to the set of architectural styles current between 1714 and 1830. It is named after the first four British monarchs of the House of Hanover—George I, George II, George III, and George IV—who reigned in continuous succession from August 1714 to June 1830. The style was revived in the late 19th century in the United States as Colonial Revival architecture and in the early 20th century in Great Britain as Neo-Georgian architecture; in both it is also called Georgian Revival architecture. In the United States the term 'Georgian' is generally used to describe all buildings from the period, regardless of style; in Britain it is generally restricted to buildings that are 'architectural in intention', and have stylistic characteristics that are typical of the period, though that covers a wide range.",
+    origins: ["between 1714 and 1830", "Great Britain"],
+  },
   { name: "Gothic", id: 15 },
   { name: "Greek Revival", id: 16 },
   { name: "International style", id: 17 },

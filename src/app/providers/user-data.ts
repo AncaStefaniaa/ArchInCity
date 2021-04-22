@@ -17,6 +17,7 @@ export class UserData {
 
   addFavorite(sessionName: string): void {
     this.favorites.push(sessionName);
+    console.log(this.favorites);
   }
 
   removeFavorite(sessionName: string): void {

@@ -69,14 +69,12 @@ export class LoginPage {
     if (form.valid) {
       this.logInService.logInUser(this.login).subscribe(
         (res) => {
-          console.log(res);
           this.presentSuccessToast("You have successfully logged in");
           this.userData.login(this.login.email);
           this.userData.saveToLocalStorage(this.login.email, res.result);
           this.router.navigateByUrl("/app/tabs/schedule");
         },
         (err) => {
-          console.log(err);
           this.presentErrorToast(err.error);
         }
       );

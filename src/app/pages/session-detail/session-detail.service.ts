@@ -21,4 +21,28 @@ export class SessionDetailService {
       },
     });
   }
+
+  deleteSession(sessionId) {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    let body = {
+      userId: userData.userId,
+      photoId: sessionId,
+    };
+
+    return this.httpClient.post("http://192.168.1.133:3000/delete_image", body);
+  }
+
+  addFavoriteSession(sessionId) {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+
+    let body = {
+      userId: userData.userId,
+      photoId: sessionId,
+    };
+
+    return this.httpClient.post(
+      "http://192.168.1.133:3000/favorite_image",
+      body
+    );
+  }
 }
