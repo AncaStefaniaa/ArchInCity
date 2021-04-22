@@ -33,3 +33,20 @@ $categories: (
     padding-left: 10px;
   }
 }
+
+.my-building-details{
+  height: 100px;
+    margin-left: 47px;
+    display: flex;
+    flex-direction: column;
+}
+.avatar{
+width: 210%;
+    height: 190%;
+    max-width: 300% !important;
+    margin-top: -27px;
+}
+
+ion-label{
+  color:success;
+}

@@ -43,13 +43,13 @@ export class AppComponent implements OnInit {
       title: "About",
       url: "/app/tabs/about",
       icon: "information-circle",
-      visible:true,
+      visible: true,
     },
     {
       title: "My Buildings",
       url: "/app/tabs/schedule",
       icon: "business",
-      visible:false,
+      visible: false,
     },
   ];
 
@@ -131,7 +131,7 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.userData.logout().then(() => {
-      return this.router.navigateByUrl("/app/tabs/schedule");
+      return this.router.navigateByUrl("/app/tabs/over-time");
     });
   }
 

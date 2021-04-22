@@ -59,6 +59,7 @@ export class DiscoverPage implements OnInit {
   isScanned: boolean = false;
   currentArchName: any;
   currentArchImage: any;
+  address: any;
 
   constructor(
     private dataProvider: ConferenceData,
@@ -95,6 +96,14 @@ export class DiscoverPage implements OnInit {
           center: true,
         };
         localStorage.setItem("coordonates", JSON.stringify(coordonates));
+
+        this.discoverService
+          .getAddress(this.currPhotoLatitude, this.currPhotoLongitude)
+          .subscribe((res) => {
+            console.log(res);
+            this.address = this.buildAddress(res);
+            console.log(this.address);
+          });
       })
       .catch((error) => {
         console.log("Error getting location", error);
@@ -108,6 +117,33 @@ export class DiscoverPage implements OnInit {
       // console.log(data.coords.latitude);
       // console.log(data.coords.longitude);
     });
+  }
+
+  buildAddress(geolocationData) {
+    if (
+      !geolocationData ||
+      !geolocationData.results ||
+      !geolocationData.results.length
+    ) {
+      return "Unknown location";
+    }
+
+    let bestResult = geolocationData.results[0];
+    let components = bestResult.address_components;
+
+    let country = this.getComponentByType(components, "country");
+    let city = this.getComponentByType(components, "locality");
+    let street = this.getComponentByType(components, "route");
+
+    return [street, city, country];
+  }
+
+  getComponentByType(data, type) {
+    for (let el of data) {
+      if (el.types.indexOf(type) !== -1) {
+        return el.long_name;
+      }
+    }
   }
 
   async presentToast(text) {
@@ -153,7 +189,8 @@ export class DiscoverPage implements OnInit {
               imageData,
               this.buildingStyle,
               this.currPhotoLatitude,
-              this.currPhotoLongitude
+              this.currPhotoLongitude,
+              this.address
             )
             .subscribe(
               (res) => {

@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import {
   AlertController,
   IonList,
-  IonRouterOutlet,
+  // IonRouterOutlet,
   LoadingController,
   ModalController,
   ToastController,
@@ -15,6 +15,7 @@ import { ConferenceData } from "../../providers/conference-data";
 import { UserData } from "../../providers/user-data";
 import { architecturalStyles } from "../discover/discover.columns";
 import { myBuildings } from "./gallery.columns";
+import { GalleryService } from "./gallery.service";
 
 @Component({
   selector: "page-schedule",
@@ -34,6 +35,9 @@ export class SchedulePage implements OnInit {
   groups: any = [];
   confDate: string;
   showSearchbar: boolean;
+  userData: any;
+  image: any;
+  architecturalStyles: any;
 
   constructor(
     public alertCtrl: AlertController,
@@ -41,16 +45,33 @@ export class SchedulePage implements OnInit {
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     public router: Router,
-    public routerOutlet: IonRouterOutlet,
+    // public routerOutlet: IonRouterOutlet,
     public toastCtrl: ToastController,
     public user: UserData,
-    public config: Config
+    public config: Config,
+    private galleryService: GalleryService
   ) {}
 
   ngOnInit() {
     this.updateSchedule();
-
+    this.architecturalStyles = architecturalStyles;
     this.ios = this.config.get("mode") === "ios";
+  }
+
+  ionViewWillEnter() {
+    this.galleryService.getAllImages().subscribe((res) => {
+      this.userData = res["result"];
+      this.userData = this.buildJson(this.userData);
+
+      this.userData.forEach((element) => {
+        element.buildings.forEach((build) => {
+          build["country"] = "bla";
+        });
+      });
+    });
+
+    this.shownSessions = 3;
+    this.groups = myBuildings;
   }
 
   updateSchedule() {
@@ -58,38 +79,56 @@ export class SchedulePage implements OnInit {
     if (this.scheduleList) {
       this.scheduleList.closeSlidingItems();
     }
+  }
 
-    this.confData
-      .getTimeline(
-        this.dayIndex,
-        this.queryText,
-        this.excludeTracks,
-        this.segment
-      )
-      .subscribe((data: any) => {
-        this.shownSessions = 3;
-        this.groups = myBuildings;
-      });
+  buildJson(data) {
+    let builtJson = [];
+    let grouped = this.groupByStyle(data);
+
+    for (let key in grouped) {
+      let value = grouped[key];
+
+      let obj = {
+        name: key,
+        buildings: value,
+      };
+
+      builtJson.push(obj);
+    }
+
+    console.log(builtJson);
+    return builtJson;
+  }
+
+  groupByStyle(data) {
+    let map = new Map<string, Array<any>>();
+    data.forEach((element) => {
+      if (element.style in map) {
+        map[element.style].push(element);
+      } else {
+        map[element.style] = [element];
+      }
+    });
+
+    return map;
   }
 
   async presentFilter() {
-    const modal = await this.modalCtrl.create({
-      component: ScheduleFilterPage,
-      swipeToClose: true,
-      presentingElement: this.routerOutlet.nativeEl,
-      componentProps: { excludedTracks: this.excludeTracks },
-    });
-    await modal.present();
-
-    const { data } = await modal.onWillDismiss();
-    if (data) {
-      this.excludeTracks = data;
-      this.updateSchedule();
-    }
+    // const modal = await this.modalCtrl.create({
+    //   component: ScheduleFilterPage,
+    //   swipeToClose: true,
+    //   presentingElement: this.routerOutlet.nativeEl,
+    //   componentProps: { excludedTracks: this.excludeTracks },
+    // });
+    // await modal.present();
+    // const { data } = await modal.onWillDismiss();
+    // if (data) {
+    //   this.excludeTracks = data;
+    //   this.updateSchedule();
+    // }
   }
 
   async addFavorite(slidingItem: HTMLIonItemSlidingElement, sessionData: any) {
-    console.log(this.user);
     if (this.user.hasFavorite(sessionData.name)) {
       // Prompt to remove favorite
       this.removeFavorite(slidingItem, sessionData, "Favorite already added");

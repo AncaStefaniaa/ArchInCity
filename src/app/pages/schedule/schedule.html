@@ -3,6 +3,7 @@
     <ion-buttons *ngIf="!showSearchbar" slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
+
     <ion-segment
       *ngIf="ios"
       [(ngModel)]="segment"
@@ -55,21 +56,35 @@
   </ion-header>
 
   <ion-list #scheduleList [hidden]="shownSessions === 0">
-    <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
+    <ion-item-group *ngFor="let group of userData" [hidden]="group.hide">
       <ion-item-divider sticky>
-        <ion-label> {{group.name}} </ion-label>
+        <ion-label> {{architecturalStyles[group.name].name}} </ion-label>
       </ion-item-divider>
 
       <ion-item-sliding
         *ngFor="let build of group.buildings"
         #slidingItem
-        [attr.track]="group.id"
+        [attr.track]="build.id"
         [hidden]="false"
       >
         <ion-item routerLink="/app/tabs/schedule/session/{{build.id}}">
-          <ion-label>
-            <h3>{{group.name}}</h3>
-            <p>{{build.image}} &mdash; {{build.date}}:</p>
+          <ion-thumbnail slot="start">
+            <img
+              class="avatar"
+              [src]="build.url"
+              [alt]="build.url + ' profile picture'"
+            />
+          </ion-thumbnail>
+          <ion-label class="my-building-details">
+          
+             <ion-chip>
+            <ion-icon name="navigate"> </ion-icon>
+             <ion-label >{{build.address}}</ion-label>
+            </ion-chip>
+            <ion-chip>
+              <ion-icon name="calendar" color="dark"></ion-icon>
+               <ion-label >{{build.datetime}}</ion-label>
+            </ion-chip>
           </ion-label>
         </ion-item>
         <ion-item-options>

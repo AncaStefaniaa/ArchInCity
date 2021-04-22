@@ -54,7 +54,7 @@ export class DiscoverService {
     return blob;
   }
 
-  sendImageUser(imageData, style, latitude, longitude) {
+  sendImageUser(imageData, style, latitude, longitude, address) {
     const date = new Date().valueOf();
     const imageName = date + ".jpeg";
 
@@ -68,21 +68,29 @@ export class DiscoverService {
 
     let formData = new FormData();
 
-    console.log()
     formData.append("file", imageBlob, imageName);
     formData.append("userId", userData.userId);
     formData.append("latitude", latitude);
     formData.append("longitude", longitude);
     formData.append("style", style);
-
+    formData.append("address", address);
     var options = { content: formData };
-
-    console.log(options);
-    console.log(formData);
 
     return this.httpClient.post<any>(
       "http://192.168.1.133:3000/add_image",
       formData
+    );
+  }
+
+  getAddress(latitude, longitude) {
+    return this.httpClient.get(
+      "https://maps.googleapis.com/maps/api/geocode/json",
+      {
+        params: {
+          latlng: `${latitude},${longitude}`,
+          key: "AIzaSyDUi5qVkVuZo1yhMWgSMOubk4igV53Jsyc",
+        },
+      }
     );
   }
 }
