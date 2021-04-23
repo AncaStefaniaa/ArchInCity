@@ -58,6 +58,12 @@
           Password is required
         </p>
       </ion-text>
+
+      <ion-text color="twitter">
+        <p (click)="changePassword()" class="ion-padding-start forgot-password">
+          Forgot password?
+        </p>
+      </ion-text>
     </ion-list>
 
     <ion-row>
@@ -67,7 +73,7 @@
         >
       </ion-col>
       <ion-col>
-        <ion-button (click)="onSignup()" color="light" expand="block"
+        <ion-button (click)="onSignup()" color="favorite" expand="block"
           >Signup</ion-button
         >
       </ion-col>

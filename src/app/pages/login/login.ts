@@ -8,7 +8,11 @@ import { UserOptions, UserLogin } from "../../interfaces/user-options";
 
 import { LogInService } from "./login.service";
 
-import { ToastController } from "@ionic/angular";
+import { ToastController, AlertController } from "@ionic/angular";
+
+import { AccountService } from "../account/account.service";
+import { ToastHelper } from "../../providers/toast-helper";
+import { LoadingHelper } from "../../providers/loading-helper";
 
 @Component({
   selector: "page-login",
@@ -18,12 +22,17 @@ import { ToastController } from "@ionic/angular";
 export class LoginPage {
   login: UserLogin = { email: "", password: "" };
   submitted = false;
+  email: string;
 
   constructor(
     public userData: UserData,
     public router: Router,
     private logInService: LogInService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private accountService: AccountService,
+    private toastHelper: ToastHelper,
+    private loadingHelper: LoadingHelper,
+    public alertCtrl: AlertController
   ) {}
 
   async presentErrorToast(text) {
@@ -83,5 +92,37 @@ export class LoginPage {
 
   onSignup() {
     this.router.navigateByUrl("/signup");
+  }
+
+  async changePassword() {
+    const alert = await this.alertCtrl.create({
+      header: "Please confirm your email",
+      buttons: [
+        "Cancel",
+        {
+          text: "Ok",
+          handler: (data: any) => {
+            this.loadingHelper.presentLoading(300);
+            this.accountService.changePassword(data).subscribe(
+              (res) => {
+                this.toastHelper.presentSuccessToast("Yey. A link has been!");
+              },
+              (err) => {
+                this.toastHelper.presentErrorToast("Error");
+              }
+            );
+          },
+        },
+      ],
+      inputs: [
+        {
+          type: "text",
+          name: "email",
+          value: this.email,
+          placeholder: "email",
+        },
+      ],
+    });
+    await alert.present();
   }
 }

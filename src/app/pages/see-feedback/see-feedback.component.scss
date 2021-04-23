@@ -1,0 +1,9 @@
+.footer-author {
+  display: block;
+}
+
+::ng-deep {
+  .input-wrapper {
+    flex-direction: column !important;
+  }
+}

@@ -6,20 +6,21 @@ import { ToastController } from "@ionic/angular";
 @Injectable({
   providedIn: "root",
 })
-export class GalleryService {
+export class FeedbackService {
   constructor(
     private httpClient: HttpClient,
     private toastController: ToastController
   ) {}
 
-  getAllImages() {
+  sendFeedback(formData) {
     const userData = JSON.parse(localStorage.getItem("userData"));
-
-    // formData.append("userId", userData.userId);
-    return this.httpClient.get("http://192.168.1.133:3000/get_images", {
-      params: {
-        userId: userData.userId,
-      },
-    });
+    let body = {
+      userId: userData.userId,
+      feedback: formData,
+    };
+    return this.httpClient.post(
+      "http://192.168.1.133:3000/send_feedback",
+      body
+    );
   }
 }

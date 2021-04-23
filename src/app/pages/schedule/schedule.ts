@@ -43,6 +43,8 @@ export class SchedulePage implements OnInit {
   flag: number = 0;
   backupData: any;
   distance$: Observable<number>;
+  showSkeleton: boolean = true;
+
   constructor(
     public alertCtrl: AlertController,
     public confData: ConferenceData,
@@ -57,6 +59,7 @@ export class SchedulePage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.showSkeleton = true;
     this.updateSchedule(false);
     this.architecturalStyles = architecturalStyles;
     this.ios = this.config.get("mode") === "ios";
@@ -85,6 +88,7 @@ export class SchedulePage implements OnInit {
       this.userData[2].favorite = true;
 
       this.backupData = this.userData;
+      this.showSkeleton = false;
     });
 
     this.shownSessions = 3;

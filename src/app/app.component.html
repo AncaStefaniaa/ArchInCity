@@ -39,7 +39,7 @@
             </ion-item>
           </ion-menu-toggle>
 
-          <ion-menu-toggle autoHide="false">
+          <ion-menu-toggle *ngIf="!isAdmin" autoHide="false">
             <ion-item
               routerLink="/support"
               routerLinkActive="active"
@@ -47,7 +47,19 @@
               detail="false"
             >
               <ion-icon slot="start" name="help"></ion-icon>
-              <ion-label> Support </ion-label>
+              <ion-label> Feedback </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle *ngIf="isAdmin" autoHide="false">
+            <ion-item
+              routerLink="/see-feedback"
+              routerLinkActive="active"
+              routerDirection="root"
+              detail="false"
+            >
+              <ion-icon slot="start" name="help"></ion-icon>
+              <ion-label> See Feedback </ion-label>
             </ion-item>
           </ion-menu-toggle>
 
@@ -82,7 +94,7 @@
               detail="false"
             >
               <ion-icon slot="start" name="help"></ion-icon>
-              <ion-label> Support </ion-label>
+              <ion-label> Send feedback </ion-label>
             </ion-item>
           </ion-menu-toggle>
 

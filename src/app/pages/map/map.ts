@@ -10,6 +10,7 @@ import { Platform } from "@ionic/angular";
 import { DOCUMENT } from "@angular/common";
 
 import { darkStyle } from "./map-dark-style";
+import { GalleryService } from "../schedule/gallery.service";
 
 @Component({
   selector: "page-map",
@@ -18,12 +19,15 @@ import { darkStyle } from "./map-dark-style";
 })
 export class MapPage implements AfterViewInit {
   @ViewChild("mapCanvas", { static: true }) mapElement: ElementRef;
-
+  mapBuildings: any;
   constructor(
     @Inject(DOCUMENT) private doc: Document,
     public confData: ConferenceData,
-    public platform: Platform
+    public platform: Platform,
+    private galleryService: GalleryService
   ) {}
+
+  ngOnInit() {}
 
   async ngAfterViewInit() {
     const appEl = this.doc.querySelector("ion-app");
@@ -38,39 +42,45 @@ export class MapPage implements AfterViewInit {
     );
 
     let map;
-
-    this.confData.getMap().subscribe((mapData: any) => {
-      const mapEle = this.mapElement.nativeElement;
-      console.log(mapData);
-      console.log(mapData.find((d: any) => d.center));
-      mapData = [JSON.parse(localStorage.getItem("coordonates"))];
-      console.log(mapData);
-      console.log(mapData.find((d: any) => d.center));
-      map = new googleMaps.Map(mapEle, {
-        center: mapData.find((d: any) => d.center),
-        zoom: 16,
-        styles: style,
-      });
-
-      console.log(JSON.parse(localStorage.getItem("coordonates")));
-
-      mapData.forEach((markerData: any) => {
-        const infoWindow = new googleMaps.InfoWindow({
-          content: `<h5>${markerData.name}</h5>`,
-        });
-        const marker = new googleMaps.Marker({
-          position: markerData,
-          map,
-          title: markerData.name,
+    this.galleryService.getAllImages().subscribe((res) => {
+      this.mapBuildings = res["result"];
+      this.constructMapData(this.mapBuildings);
+      this.confData.getMap().subscribe((mapData: any) => {
+        const mapEle = this.mapElement.nativeElement;
+        console.log(this.mapBuildings);
+        let mapData2 = [
+          { lat: 44.4317345, lng: 26.0524488, center: true },
+          { lat: 44.43175, lng: 26.0524488, center: true },
+        ];
+        mapData = [JSON.parse(localStorage.getItem("coordonates"))];
+        // console.log(mapData);
+        // console.log(mapData.find((d: any) => d.center));
+        map = new googleMaps.Map(mapEle, {
+          center: this.mapBuildings.find((d: any) => d.center),
+          zoom: 16,
+          styles: style,
         });
 
-        marker.addListener("click", () => {
-          infoWindow.open(map, marker);
-        });
-      });
+        console.log(JSON.parse(localStorage.getItem("coordonates")));
 
-      googleMaps.event.addListenerOnce(map, "idle", () => {
-        mapEle.classList.add("show-map");
+        this.mapBuildings.forEach((markerData: any) => {
+          const infoWindow = new googleMaps.InfoWindow({
+            content: `<h5>${markerData.name}</h5>`,
+          });
+          const marker = new googleMaps.Marker({
+            position: markerData,
+            map,
+            title: markerData.name,
+          });
+
+          marker.addListener("click", () => {
+            infoWindow.open(map, marker);
+          });
+        });
+
+        googleMaps.event.addListenerOnce(map, "idle", () => {
+          mapEle.classList.add("show-map");
+        });
       });
     });
 
@@ -89,6 +99,14 @@ export class MapPage implements AfterViewInit {
     });
     observer.observe(appEl, {
       attributes: true,
+    });
+  }
+
+  constructMapData(mapData) {
+    mapData.forEach((element) => {
+      element["center"] = true;
+      element["lat"] = parseFloat(element["latitude"]);
+      element["lng"] = parseFloat(element["longitude"]);
     });
   }
 }

@@ -19,6 +19,13 @@ const routes: Routes = [
       import("./pages/support/support.module").then((m) => m.SupportModule),
   },
   {
+    path: "see-feedback",
+    loadChildren: () =>
+      import("./pages/see-feedback/see-feedback.module").then(
+        (m) => m.SeeFeedbackModule
+      ),
+  },
+  {
     path: "login",
     loadChildren: () =>
       import("./pages/login/login.module").then((m) => m.LoginModule),

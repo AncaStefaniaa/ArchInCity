@@ -56,6 +56,8 @@ export class AppComponent implements OnInit {
   loggedIn = false;
   dark = false;
   img = "../assets/img/arch.jpg";
+  user: string;
+  isAdmin: boolean = false;
 
   constructor(
     private menu: MenuController,
@@ -72,6 +74,11 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem("userData")).username;
+    if (this.user == "admin@admin.com") {
+      this.isAdmin = true;
+    }
+    console.log(this.isAdmin);
     this.checkLoginStatus();
     this.listenForLoginEvents();
 
