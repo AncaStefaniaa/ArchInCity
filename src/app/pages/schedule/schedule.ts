@@ -18,6 +18,7 @@ import { myBuildings } from "./gallery.columns";
 import { GalleryService } from "./gallery.service";
 import { levenshtein } from "fast-levenshtein";
 import { Observable } from "rxjs";
+import _ from "lodash";
 
 @Component({
   selector: "page-schedule",
@@ -41,7 +42,7 @@ export class SchedulePage implements OnInit {
   image: any;
   architecturalStyles: any;
   flag: number = 0;
-  backupData: any;
+  backupData: any = [];
   distance$: Observable<number>;
   showSkeleton: boolean = true;
 
@@ -77,7 +78,7 @@ export class SchedulePage implements OnInit {
         element["longName"] = this.architecturalStyles[
           parseInt(element.name)
         ].name;
-        element["favorite"] = false;
+
         element.buildings.forEach((build) => {
           let splitAddress = build.address.split(",");
           build["country"] = splitAddress[splitAddress.length - 1];
@@ -85,38 +86,60 @@ export class SchedulePage implements OnInit {
         });
       });
 
-      this.userData[2].favorite = true;
-
       this.backupData = this.userData;
       this.showSkeleton = false;
+
+      this.updateSchedule(false);
     });
 
     this.shownSessions = 3;
     this.groups = myBuildings;
   }
 
-  updateSchedule(isFavoritesTab: boolean) {
+  filterBySearch(data: any, queryText: string) {
+    return data.filter((element) => {
+      if (element.longName) {
+        let longNameLow = element.longName.toLowerCase();
+        let queryTextLow = queryText.toLowerCase();
+
+        return longNameLow.includes(queryTextLow);
+      }
+    });
+  }
+
+  updateSchedule(isSearching: boolean) {
+    console.log("---------------------");
+    console.log(this.segment);
     // Close any open sliding items when the schedule updates
     if (this.scheduleList) {
       this.scheduleList.closeSlidingItems();
     }
-    console.log(isFavoritesTab);
-    if (this.flag) {
-      if (!isFavoritesTab || this.segment == "all") {
-        this.userData = this.backupData.filter((element) => {
-          if (element.longName) {
-            let longNameLow = element.longName.toLowerCase();
-            let queryTextLow = this.queryText.toLowerCase();
 
-            return longNameLow.includes(queryTextLow);
-          }
+    if (this.segment === "all") {
+      if (isSearching) {
+        this.userData = this.filterBySearch(this.backupData, this.queryText);
+      } else {
+        this.userData = this.backupData;
+      }
+    } else if (this.segment === "favorites") {
+      let data = _.cloneDeep(this.backupData);
+
+      let tmpData = data.filter((element) => {
+        element.buildings = element.buildings.filter((el) => {
+          return el.favorite;
         });
-      } else if (isFavoritesTab) {
-        this.userData = this.backupData.filter((element) => {
-          if (element.favorite == true) {
-            return 1;
-          }
-        });
+
+        if (element.buildings.length === 0) {
+          return false;
+        }
+
+        return true;
+      });
+
+      if (isSearching) {
+        this.userData = this.filterBySearch(tmpData, this.queryText);
+      } else {
+        this.userData = tmpData;
       }
     }
   }
@@ -203,7 +226,7 @@ export class SchedulePage implements OnInit {
   ) {
     const alert = await this.alertCtrl.create({
       header: title,
-      message: "Would you like to remove this session from your favorites?",
+      message: "Would you like to remove this building from your favorites?",
       buttons: [
         {
           text: "Cancel",
@@ -218,7 +241,7 @@ export class SchedulePage implements OnInit {
           handler: () => {
             // they want to remove this session from their favorites
             this.user.removeFavorite(sessionData.name);
-            this.updateSchedule(true);
+            this.updateSchedule(false);
 
             // close the sliding item and hide the option buttons
             slidingItem.close();

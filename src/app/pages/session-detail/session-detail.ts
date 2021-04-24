@@ -165,17 +165,27 @@ export class SessionDetailPage {
 
   toggleFavorite() {
     let imageId = this.session.photo_id;
-    this.sessionDetailService.addFavoriteSession(imageId).subscribe((res) => {
-      this.presentSuccessToast("Favorite successful");
-      console.log("Favorite successful");
-    });
+    // this.sessionDetailService.addFavoriteSession(imageId).subscribe((res) => {
+    //   this.presentSuccessToast("Favorite successful");
+    //   console.log("Favorite successful");
+    // });
     console.log(this.session);
     if (this.userProvider.hasFavorite(this.session.id)) {
       this.userProvider.removeFavorite(this.session.id);
       this.isFavorite = false;
+      this.sessionDetailService
+        .toggleFavorite(imageId, this.isFavorite)
+        .subscribe((res) => {
+          console.log(res);
+        });
     } else {
       this.userProvider.addFavorite(this.session.id);
       this.isFavorite = true;
+      this.sessionDetailService
+        .toggleFavorite(imageId, this.isFavorite)
+        .subscribe((res) => {
+          console.log(res);
+        });
     }
   }
 

@@ -1,4 +1,11 @@
 img {
   max-width: 140px;
   border-radius: 50%;
+  border: 9px solid #907082;
+
+  box-shadow: 0px 1px 10px rgba(98, 140, 255, 0.5);
+}
+
+ion-content {
+  --ion-background-color: linear-gradient(90deg, #907082 0%, #f0f0f0 100%);
 }

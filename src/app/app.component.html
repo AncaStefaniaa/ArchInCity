@@ -1,9 +1,13 @@
 <ion-app [class.dark-theme]="dark">
   <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content">
+    <ion-menu menuId="main-menu" contentId="main-content">
       <ion-content>
-        <ion-list lines="none">
+        <div class="menu-header"></div>
+        <div class="header-content">
           <ion-img class="header-img" [src]="img"></ion-img>
+        </div>
+        <ion-button style="visibility: hidden">Hey</ion-button>
+        <ion-list lines="none">
           <ion-list-header> Discover </ion-list-header>
           <ion-menu-toggle
             autoHide="false"

@@ -32,16 +32,16 @@ export class SessionDetailService {
     return this.httpClient.post("http://192.168.1.133:3000/delete_image", body);
   }
 
-  addFavoriteSession(sessionId) {
-    const userData = JSON.parse(localStorage.getItem("userData"));
+  toggleFavorite(sessionId, isFavorite) {
+    // const userData = JSON.parse(localStorage.getItem("userData"));
 
     let body = {
-      userId: userData.userId,
+      isFavorite: isFavorite,
       photoId: sessionId,
     };
 
     return this.httpClient.post(
-      "http://192.168.1.133:3000/favorite_image",
+      "http://192.168.1.133:3000/favorite_status",
       body
     );
   }

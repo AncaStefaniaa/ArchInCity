@@ -10,13 +10,13 @@
 
 <ion-content>
   <div class="login-logo">
-    <img src="./../../../assets/img/arch.jpg" alt="Ionic logo" />
+    <img src="./../../../assets/img/arch.png" alt="Ionic logo" />
   </div>
 
   <form #loginForm="ngForm" novalidate>
     <ion-list>
       <ion-item>
-        <ion-label position="stacked" color="primary">Email</ion-label>
+        <ion-label position="stacked" color="light">Email</ion-label>
         <ion-input
           [(ngModel)]="login.email"
           name="email"
@@ -39,7 +39,7 @@
       </ion-text>
 
       <ion-item>
-        <ion-label position="stacked" color="primary">Password</ion-label>
+        <ion-label position="stacked" color="light">Password</ion-label>
         <ion-input
           [(ngModel)]="login.password"
           name="password"

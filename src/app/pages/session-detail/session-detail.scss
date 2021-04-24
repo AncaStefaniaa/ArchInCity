@@ -86,8 +86,11 @@ h1 {
 }
 
 .session-image {
-  width: 100%;
+  width: 118% !important;
   height: 400px;
+  margin-top: -20px;
+  margin-left: -30px;
+  max-width: 130%;
 }
 
 .map-canvas {
@@ -104,4 +107,27 @@ h1 {
 
 .show-map {
   opacity: 1;
+}
+
+.album-info {
+  margin-left: 12px;
+  p {
+    font-weight: bold;
+  }
+}
+
+ion-content {
+  --background: linear-gradient(white, #f5f2ed);
+}
+
+// .image-box {
+//   position: fixed;
+//   z-index: 0;
+//   padding-left: 15%;
+//   padding-right: 15%;
+//   padding-top: 5%;
+// }
+
+.ion-row {
+  --padding-top: 40vh !important;
 }

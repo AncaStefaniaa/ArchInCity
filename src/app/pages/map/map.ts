@@ -11,6 +11,7 @@ import { DOCUMENT } from "@angular/common";
 
 import { darkStyle } from "./map-dark-style";
 import { GalleryService } from "../schedule/gallery.service";
+import { architecturalStyles } from "../discover/discover.columns";
 
 @Component({
   selector: "page-map",
@@ -20,6 +21,8 @@ import { GalleryService } from "../schedule/gallery.service";
 export class MapPage implements AfterViewInit {
   @ViewChild("mapCanvas", { static: true }) mapElement: ElementRef;
   mapBuildings: any;
+  architecturalStyles: any;
+
   constructor(
     @Inject(DOCUMENT) private doc: Document,
     public confData: ConferenceData,
@@ -27,7 +30,9 @@ export class MapPage implements AfterViewInit {
     private galleryService: GalleryService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.architecturalStyles = architecturalStyles;
+  }
 
   async ngAfterViewInit() {
     const appEl = this.doc.querySelector("ion-app");
@@ -65,12 +70,17 @@ export class MapPage implements AfterViewInit {
 
         this.mapBuildings.forEach((markerData: any) => {
           const infoWindow = new googleMaps.InfoWindow({
-            content: `<h5>${markerData.name}</h5>`,
+            content: `<img width="120" height="100" src="${
+              markerData.url
+            }"><h5 style="text-align: center;">${
+              architecturalStyles[markerData.style].name
+            }</h5>`,
           });
+          console.log(markerData["style"]);
           const marker = new googleMaps.Marker({
             position: markerData,
             map,
-            title: markerData.name,
+            title: markerData["style"],
           });
 
           marker.addListener("click", () => {

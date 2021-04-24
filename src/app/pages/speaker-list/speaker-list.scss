@@ -52,3 +52,7 @@ ion-col:not(:last-of-type) .speaker-card {
   margin-left: -15px;
   margin-top: -15px;
 }
+
+ion-card {
+  box-shadow: 0px 1px 10px rgba(98, 140, 255, 0.5);
+}

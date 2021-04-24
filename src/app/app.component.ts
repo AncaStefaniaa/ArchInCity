@@ -51,11 +51,17 @@ export class AppComponent implements OnInit {
       icon: "business",
       visible: false,
     },
+    {
+      title: "Top Buildings",
+      url: "/top",
+      icon: "flame",
+      visible: false,
+    },
   ];
 
   loggedIn = false;
   dark = false;
-  img = "../assets/img/arch.jpg";
+  img = "../assets/img/arch.png";
   user: string;
   isAdmin: boolean = false;
 

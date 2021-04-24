@@ -26,6 +26,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: "top",
+    loadChildren: () =>
+      import("./pages/top/top.module").then((m) => m.TopModule),
+  },
+  {
     path: "login",
     loadChildren: () =>
       import("./pages/login/login.module").then((m) => m.LoginModule),

@@ -30,25 +30,34 @@
 
 <ion-content>
   <div *ngIf="session" class="ion-padding">
-    <ion-card>
+    <div class="ion-text-center image-box">
       <img class="session-image" [src]="session.url" />
-    </ion-card>
-    <ion-card>
-      <h4>
-        <ion-icon name="paper-plane" color="dark"></ion-icon>{{session.address}}
-      </h4>
-    </ion-card>
-    <ion-card>
-      <ion-chip color="danger">
-        <ion-icon name="calendar" color="dark"></ion-icon>
-        <ion-label>{{session.datetime}}</ion-label>
-      </ion-chip>
-      <ion-chip color="success">
-        <ion-icon name="brush" color="dark"></ion-icon>
-        <ion-label>{{architecturalStyles[session.style].name}}</ion-label>
-      </ion-chip>
-    </ion-card>
+    </div>
+    <ion-row>
+      <ion-col size="12" class="album-info">
+        <p>{{architecturalStyles[session.style].name}}</p>
+        <span>Date and time {{session.datetime}}</span>
+      </ion-col>
+
+      <ion-card>
+        <h4>
+          <ion-icon name="paper-plane" color="dark"></ion-icon
+          >{{session.address}}
+        </h4>
+      </ion-card>
+      <ion-card>
+        <ion-chip color="danger">
+          <ion-icon name="calendar" color="dark"></ion-icon>
+          <ion-label>{{session.datetime}}</ion-label>
+        </ion-chip>
+        <ion-chip color="success">
+          <ion-icon name="brush" color="dark"></ion-icon>
+          <ion-label>{{architecturalStyles[session.style].name}}</ion-label>
+        </ion-chip>
+      </ion-card>
+    </ion-row>
   </div>
+
   <!-- <ion-list>
     <ion-item (click)="sessionClick('add to calendar')" button>
       <ion-label color="primary">Add to Calendar</ion-label>
