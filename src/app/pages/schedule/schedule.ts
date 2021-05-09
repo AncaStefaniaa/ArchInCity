@@ -102,14 +102,16 @@ export class SchedulePage implements OnInit {
         let longNameLow = element.longName.toLowerCase();
         let queryTextLow = queryText.toLowerCase();
 
-        return longNameLow.includes(queryTextLow);
+        if (longNameLow.includes(queryTextLow)) {
+          return true;
+        }
+
+        return this.levenshtein(longNameLow, queryTextLow) <= 2;
       }
     });
   }
 
   updateSchedule(isSearching: boolean) {
-    console.log("---------------------");
-    console.log(this.segment);
     // Close any open sliding items when the schedule updates
     if (this.scheduleList) {
       this.scheduleList.closeSlidingItems();
@@ -123,6 +125,8 @@ export class SchedulePage implements OnInit {
       }
     } else if (this.segment === "favorites") {
       let data = _.cloneDeep(this.backupData);
+
+      console.log(data);
 
       let tmpData = data.filter((element) => {
         element.buildings = element.buildings.filter((el) => {
@@ -263,23 +267,41 @@ export class SchedulePage implements OnInit {
     fab.close();
   }
 
-  levenshtein = (a: string, b: string): number => {
-    const matrix = Array.from({ length: a.length }).map(() =>
-      Array.from({ length: b.length }).map(() => 0)
-    );
+  levenshtein(a, b) {
+    if (a.length === 0) return b.length;
+    if (b.length === 0) return a.length;
 
-    for (let i = 0; i < a.length; i++) matrix[i][0] = i;
+    var matrix = [];
 
-    for (let i = 0; i < b.length; i++) matrix[0][i] = i;
+    // increment along the first column of each row
+    var i;
+    for (i = 0; i <= b.length; i++) {
+      matrix[i] = [i];
+    }
 
-    for (let j = 0; j < b.length; j++)
-      for (let i = 0; i < a.length; i++)
-        matrix[i][j] = Math.min(
-          (i == 0 ? 0 : matrix[i - 1][j]) + 1,
-          (j == 0 ? 0 : matrix[i][j - 1]) + 1,
-          (i == 0 || j == 0 ? 0 : matrix[i - 1][j - 1]) + (a[i] == b[j] ? 0 : 1)
-        );
+    // increment each column in the first row
+    var j;
+    for (j = 0; j <= a.length; j++) {
+      matrix[0][j] = j;
+    }
 
-    return matrix[a.length - 1][b.length - 1];
-  };
+    // Fill in the rest of the matrix
+    for (i = 1; i <= b.length; i++) {
+      for (j = 1; j <= a.length; j++) {
+        if (b.charAt(i - 1) == a.charAt(j - 1)) {
+          matrix[i][j] = matrix[i - 1][j - 1];
+        } else {
+          matrix[i][j] = Math.min(
+            matrix[i - 1][j - 1] + 1, // substitution
+            Math.min(
+              matrix[i][j - 1] + 1, // insertion
+              matrix[i - 1][j] + 1
+            )
+          ); // deletion
+        }
+      }
+    }
+
+    return matrix[b.length][a.length];
+  }
 }

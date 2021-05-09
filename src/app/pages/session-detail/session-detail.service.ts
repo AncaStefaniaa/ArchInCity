@@ -15,7 +15,7 @@ export class SessionDetailService {
   getAllImages() {
     const userData = JSON.parse(localStorage.getItem("userData"));
 
-    return this.httpClient.get("http://192.168.1.133:3000/get_images", {
+    return this.httpClient.get("http://192.168.1.193:3000/get_images", {
       params: {
         userId: userData.userId,
       },
@@ -29,7 +29,7 @@ export class SessionDetailService {
       photoId: sessionId,
     };
 
-    return this.httpClient.post("http://192.168.1.133:3000/delete_image", body);
+    return this.httpClient.post("http://192.168.1.193:3000/delete_image", body);
   }
 
   toggleFavorite(sessionId, isFavorite) {
@@ -41,7 +41,7 @@ export class SessionDetailService {
     };
 
     return this.httpClient.post(
-      "http://192.168.1.133:3000/favorite_status",
+      "http://192.168.1.193:3000/favorite_status",
       body
     );
   }

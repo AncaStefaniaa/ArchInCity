@@ -1,1 +1,79 @@
 top
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Top Buildings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-segment [(ngModel)]="segment" (ionChange)="updateSection()">
+    <ion-segment-button value="recomended">
+      <ion-label>For you</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="top">
+      <ion-label>Top</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="segment === 'recomended'">
+    <div class="ion-padding">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3">
+            <ion-badge color="primary">Style</ion-badge>
+          </ion-col>
+          <ion-col size="3">
+            <ion-badge color="primary">City</ion-badge>
+          </ion-col>
+          <ion-col size="3">
+            <ion-badge color="primary">Country</ion-badge>
+          </ion-col>
+          <ion-col size="3">
+            <ion-badge color="primary">Street</ion-badge>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <ion-slides [options]="options">
+      <ion-slide *ngFor="let item of dataArray">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="12" class="poster-col">
+              <div class="poster-image">
+                <ion-icon name="ribbon"></ion-icon>
+                <img [src]="item.url" />
+              </div>
+            </ion-col>
+            <ion-col size="12">
+              <h5 class="ion-no-margin">
+                {{ architecturalStyles[item.style].name }}
+              </h5>
+              <p class="ion-no-margin rate">
+                <ion-icon name="star"></ion-icon>8.5
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+      <!-- </ng-template> -->
+    </ion-slides>
+  </div>
+
+  <div class="images" *ngIf="segment === 'top'">
+    <div class="one-image" *ngFor="let item of dataArray">
+      <ion-card>
+        <ion-avatar>
+          <img [src]="item.url" />
+          <ion-label>Label</ion-label>
+        </ion-avatar>
+
+        <img [src]="item.url" />
+        <ion-label>Label</ion-label>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

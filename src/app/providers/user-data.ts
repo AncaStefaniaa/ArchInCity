@@ -1,15 +1,37 @@
 import { Injectable } from "@angular/core";
 import { Storage } from "@ionic/storage";
+import { HttpClient } from "@angular/common/http";
+import { SessionDetailService } from "../pages/session-detail/session-detail.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class UserData {
-  favorites: string[] = [];
+  favorites: string[];
   HAS_LOGGED_IN = "hasLoggedIn";
   HAS_SEEN_TUTORIAL = "hasSeenTutorial";
 
-  constructor(public storage: Storage) {}
+  constructor(
+    public storage: Storage,
+    private httpClient: HttpClient,
+    private sessionDetailService: SessionDetailService
+  ) {
+    let allImages = [];
+
+    this.sessionDetailService.getAllImages().subscribe((res) => {
+      console.log(res);
+      this.favorites = [];
+      allImages = res["result"];
+
+      console.log("weee");
+      console.log(allImages);
+      allImages.forEach((element) => {
+        if (element.favorite == "true") {
+          this.addFavorite(element.id);
+        }
+      });
+    });
+  }
 
   hasFavorite(sessionName: string): boolean {
     return this.favorites.indexOf(sessionName) > -1;
@@ -17,7 +39,6 @@ export class UserData {
 
   addFavorite(sessionName: string): void {
     this.favorites.push(sessionName);
-    console.log(this.favorites);
   }
 
   removeFavorite(sessionName: string): void {

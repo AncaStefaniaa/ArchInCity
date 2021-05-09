@@ -15,7 +15,7 @@ export class AccountService {
 
   changePassword(email) {
     return this.httpClient.post(
-      "http://192.168.1.133:3000/reset_password",
+      "http://192.168.1.193:3000/reset_password",
       email
     );
   }
@@ -32,7 +32,7 @@ export class AccountService {
     var options = { content: formData };
 
     return this.httpClient.post<any>(
-      "http://192.168.1.133:3000/arch_recognition",
+      "http://192.168.1.193:3000/arch_recognition",
       formData
     );
   }

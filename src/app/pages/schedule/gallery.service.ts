@@ -16,7 +16,7 @@ export class GalleryService {
     const userData = JSON.parse(localStorage.getItem("userData"));
 
     // formData.append("userId", userData.userId);
-    return this.httpClient.get("http://192.168.1.133:3000/get_images", {
+    return this.httpClient.get("http://192.168.1.193:3000/get_images", {
       params: {
         userId: userData.userId,
       },

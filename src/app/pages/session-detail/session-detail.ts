@@ -46,10 +46,8 @@ export class SessionDetailPage {
       const sessionId = this.route.snapshot.paramMap.get("sessionId");
       for (const build of res["result"]) {
         if (build && build.id == sessionId) {
-          console.log(build);
           this.session = build;
-          console.log(this.session.id);
-          this.isFavorite = this.userProvider.hasFavorite(this.session.id);
+          this.isFavorite = build.favorite;
           this.constructMap();
           break;
         }
@@ -169,24 +167,45 @@ export class SessionDetailPage {
     //   this.presentSuccessToast("Favorite successful");
     //   console.log("Favorite successful");
     // });
-    console.log(this.session);
-    if (this.userProvider.hasFavorite(this.session.id)) {
-      this.userProvider.removeFavorite(this.session.id);
+    // console.log("console log ul vietii");
+    // console.log(this.isFavorite);
+
+    if (this.isFavorite) {
       this.isFavorite = false;
       this.sessionDetailService
         .toggleFavorite(imageId, this.isFavorite)
         .subscribe((res) => {
           console.log(res);
         });
+
+      this.userProvider.removeFavorite(this.session.id);
     } else {
-      this.userProvider.addFavorite(this.session.id);
       this.isFavorite = true;
       this.sessionDetailService
         .toggleFavorite(imageId, this.isFavorite)
         .subscribe((res) => {
           console.log(res);
         });
+
+      this.userProvider.addFavorite(this.session.id);
     }
+
+    // if (this.userProvider.hasFavorite(this.session.id)) {
+    //   this.userProvider.removeFavorite(this.session.id);
+    //   this.isFavorite = false;
+    //   this.sessionDetailService
+    //     .toggleFavorite(imageId, this.isFavorite)
+    //     .subscribe((res) => {
+    //       console.log(res);
+    //     });
+    // } else {
+    //   this.isFavorite = true;
+    //   this.sessionDetailService
+    //     .toggleFavorite(imageId, this.isFavorite)
+    //     .subscribe((res) => {
+    //       console.log(res);
+    //     });
+    // }
   }
 
   shareSession() {

@@ -12,7 +12,13 @@ export class TopService {
     private toastController: ToastController
   ) {}
 
-  getFeedback() {
-    return this.httpClient.get("http://192.168.1.133:3000/get_feedback");
+  getTop() {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+
+    return this.httpClient.get("http://192.168.1.193:3000/get_images", {
+      params: {
+        userId: userData.userId,
+      },
+    });
   }
 }
