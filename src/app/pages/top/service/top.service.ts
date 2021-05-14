@@ -13,12 +13,19 @@ export class TopService {
   ) {}
 
   getTop() {
-    const userData = JSON.parse(localStorage.getItem("userData"));
 
-    return this.httpClient.get("http://192.168.1.193:3000/get_images", {
-      params: {
-        userId: userData.userId,
-      },
-    });
+
+    return this.httpClient.get("http://192.168.1.193:3000/shared_photos");
+  }
+
+  addLike(photoId){
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    console.log(userData);
+    let body = {
+      userId: userData.userId,
+      photoId: photoId
+    };
+        console.log(body);
+    return this.httpClient.post("http://192.168.1.193:3000/vote_photo", body);
   }
 }

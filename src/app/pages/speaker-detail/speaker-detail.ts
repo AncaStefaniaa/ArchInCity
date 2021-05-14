@@ -18,7 +18,7 @@ export class SpeakerDetailPage {
       id: "1",
       location: "Near Eastern Archaeology",
       name: "Achaemenid architecture",
-      profilePic: "../../../assets/img/architecture/achaemenid.jpg",
+      image: "../../../assets/img/architecture/achaemenid.jpg",
       title:
         "with elements of Assyrian, Egyptian, Median and Asiatic Greek all incorporated",
       wikipedia: "https://en.wikipedia.org/wiki/Baroque_architecture",
@@ -29,7 +29,7 @@ export class SpeakerDetailPage {
       id: "2",
       location: "United States in Boston in the 1890s.",
       name: "American Craftsman",
-      profilePic: "../../../assets/img/architecture/american-craftsman.jpg",
+      image: "../../../assets/img/architecture/american-craftsman.jpg",
       title: "United States in Boston in the 1890s.",
       wikipedia: "https://en.wikipedia.org/wiki/Art_Deco",
     },
@@ -39,7 +39,7 @@ export class SpeakerDetailPage {
       id: "3",
       location: "France just before World War I",
       name: "Art Deco",
-      profilePic: "../../../assets/img/architecture/art-deco.jpg",
+      image: "../../../assets/img/architecture/art-deco.jpg",
       title: "France just before World War I",
       wikipedia: "https://en.wikipedia.org/wiki/Baroque_architecture",
     },
@@ -49,7 +49,7 @@ export class SpeakerDetailPage {
       id: "4",
       location: "Germany, Austria, Spain and Italy",
       name: "Art Nouveau",
-      profilePic: "../../../assets/img/architecture/art-nouveau.jpg",
+      image: "../../../assets/img/architecture/art-nouveau.jpg",
       title: "Germany, Austria, Spain and Italy",
       wikipedia: "https://en.wikipedia.org/wiki/Art_Nouveau",
     },
@@ -60,7 +60,7 @@ export class SpeakerDetailPage {
       location:
         "developed in the Counter-Reformation period, when the Catholic Church needed to reassert its waning influence across Europe in the face of the Protestant Reformation",
       name: "Baroque",
-      profilePic: "../../../assets/img/architecture/baroque.jpg",
+      image: "../../../assets/img/architecture/baroque.jpg",
       title:
         "developed in the Counter-Reformation period, when the Catholic Church needed to reassert its waning influence across Europe in the face of the Protestant Reformation",
       style:

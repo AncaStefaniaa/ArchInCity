@@ -75,7 +75,6 @@ export class DiscoverPage implements OnInit {
     private ref: ChangeDetectorRef,
     private toastController: ToastController,
     private platform: Platform,
-    private filePath: FilePath,
     private geolocation: Geolocation,
     public loadingController: LoadingController // private backgroundGeolocation: BackgroundGeolocation
   ) {}

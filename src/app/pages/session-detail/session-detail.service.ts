@@ -45,4 +45,17 @@ export class SessionDetailService {
       body
     );
   }
+
+  shareImage(sessionId, url, style, message) {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    let body = {
+      userId: userData.userId,
+      photoId: sessionId,
+      message: message.message,
+      archStyle: style,
+      photoUrl: url,
+    };
+
+    return this.httpClient.post("http://192.168.1.193:3000/share_photo", body);
+  }
 }

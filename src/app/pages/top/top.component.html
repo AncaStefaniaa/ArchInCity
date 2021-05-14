@@ -20,7 +20,7 @@ top
 
   <div *ngIf="segment === 'recomended'">
     <div class="ion-padding">
-      <ion-grid>
+      <!-- <ion-grid>
         <ion-row>
           <ion-col size="3">
             <ion-badge color="primary">Style</ion-badge>
@@ -35,7 +35,7 @@ top
             <ion-badge color="primary">Street</ion-badge>
           </ion-col>
         </ion-row>
-      </ion-grid>
+      </ion-grid> -->
     </div>
 
     <ion-slides [options]="options">
@@ -44,13 +44,13 @@ top
           <ion-row>
             <ion-col size="12" class="poster-col">
               <div class="poster-image">
-                <ion-icon name="ribbon"></ion-icon>
-                <img [src]="item.url" />
+                <ion-icon class="icon-ribbon" name="ribbon"></ion-icon>
+                <img [src]="item.photoUrl" />
               </div>
             </ion-col>
             <ion-col size="12">
               <h5 class="ion-no-margin">
-                {{ architecturalStyles[item.style].name }}
+                {{ architecturalStyles[item.archStyle].name }}
               </h5>
               <p class="ion-no-margin rate">
                 <ion-icon name="star"></ion-icon>8.5
@@ -66,14 +66,28 @@ top
   <div class="images" *ngIf="segment === 'top'">
     <div class="one-image" *ngFor="let item of dataArray">
       <ion-card>
-        <ion-avatar>
-          <img [src]="item.url" />
-          <ion-label>Label</ion-label>
-        </ion-avatar>
+        <div class="avatar-container">
+            <ion-avatar class="top-avatar">  
+              <img [src]="item.photoUrl" />
+            </ion-avatar>
+            <ion-label class="avatar-label">{{ item.postedBy }}</ion-label>
+        </div>
 
-        <img [src]="item.url" />
-        <ion-label>Label</ion-label>
+        <img [src]="item.photoUrl" />
+
+        <div>
+          <div class="like-section">
+            <ion-icon (click)="addLike(item.photoId)" slot="icon-only" class="heart-icon" name="heart"></ion-icon>
+            {{ item.voteUserIds.length }}
+
+          </div>
+          <ion-label class="top-label">{{ item.message }}</ion-label>
+      
+        </div>
+  
+
       </ion-card>
+     
     </div>
   </div>
 </ion-content>

@@ -25,8 +25,8 @@ export class TopPage {
   ngOnInit() {
     this.architecturalStyles = architecturalStyles;
     this.topService.getTop().subscribe((res) => {
-      console.log(res);
       this.dataArray = res["result"];
+      console.log(this.dataArray);
     });
   }
 
@@ -37,5 +37,15 @@ export class TopPage {
     // } else {
     //   this.segment = "top";
     // }
+  }
+
+  addLike(photoId){
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    let userId = userData.userId;
+      
+    this.topService.addLike(photoId).subscribe((res) => {
+      console.log("...");
+
+    })
   }
 }

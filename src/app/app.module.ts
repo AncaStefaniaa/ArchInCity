@@ -16,10 +16,8 @@ import { Camera } from "@ionic-native/camera/ngx";
 import { File } from "@ionic-native/file/ngx";
 import { WebView } from "@ionic-native/ionic-webview/ngx";
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite/ngx";
-import { FilePath } from "@ionic-native/file-path/ngx";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 // import { BackgroundGeolocation } from "@ionic-native/background-geolocation/ngx";
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -41,7 +39,6 @@ import { Geolocation } from "@ionic-native/geolocation/ngx";
     File,
     WebView,
     SQLite,
-    FilePath,
     Geolocation,
   ],
   bootstrap: [AppComponent],

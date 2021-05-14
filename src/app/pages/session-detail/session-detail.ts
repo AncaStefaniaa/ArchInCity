@@ -11,9 +11,14 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { UserData } from "../../providers/user-data";
 import { myBuildings } from "../schedule/gallery.columns";
 import { SessionDetailService } from "./session-detail.service";
-import { ToastController, LoadingController } from "@ionic/angular";
+import {
+  ToastController,
+  LoadingController,
+  AlertController,
+} from "@ionic/angular";
 import { architecturalStyles } from "../discover/discover.columns";
 import { DOCUMENT } from "@angular/common";
+
 @Component({
   selector: "page-session-detail",
   styleUrls: ["./session-detail.scss"],
@@ -24,6 +29,7 @@ export class SessionDetailPage {
   isFavorite = false;
   defaultHref = "";
   architecturalStyles: any;
+  message: string;
   @ViewChild("mapCanvas", { static: true }) mapElement: ElementRef;
 
   constructor(
@@ -34,7 +40,8 @@ export class SessionDetailPage {
     private sessionDetailService: SessionDetailService,
     private toastController: ToastController,
     private loadingController: LoadingController,
-    private router: Router
+    private router: Router,
+    public alertCtrl: AlertController
   ) {}
 
   async ionViewDidEnter() {
@@ -53,36 +60,8 @@ export class SessionDetailPage {
         }
       }
     });
-
-    // this.dataProvider.load().subscribe((data: any) => {
-    //   console.log(data);
-    //   if (
-    //     data &&
-    //     data.schedule &&
-    //     data.schedule[0] &&
-    //     data.schedule[0].groups
-    //   ) {
-    //     const sessionId = this.route.snapshot.paramMap.get("sessionId");
-    //     for (const group of data.schedule[0].groups) {
-    //       if (group && group.sessions) {
-    //         for (const session of group.sessions) {
-    //           if (session && session.id === sessionId) {
-    //             this.session = session;
-    //             this.isFavorite = this.userProvider.hasFavorite(
-    //               this.session.name
-    //             );
-    //             break;
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-    // });
   }
 
-  // ionViewDidEnter() {
-
-  // }
   async constructMap() {
     const appEl = this.doc.querySelector("ion-app");
     let isDark = false;
@@ -163,12 +142,6 @@ export class SessionDetailPage {
 
   toggleFavorite() {
     let imageId = this.session.photo_id;
-    // this.sessionDetailService.addFavoriteSession(imageId).subscribe((res) => {
-    //   this.presentSuccessToast("Favorite successful");
-    //   console.log("Favorite successful");
-    // });
-    // console.log("console log ul vietii");
-    // console.log(this.isFavorite);
 
     if (this.isFavorite) {
       this.isFavorite = false;
@@ -189,27 +162,68 @@ export class SessionDetailPage {
 
       this.userProvider.addFavorite(this.session.id);
     }
-
-    // if (this.userProvider.hasFavorite(this.session.id)) {
-    //   this.userProvider.removeFavorite(this.session.id);
-    //   this.isFavorite = false;
-    //   this.sessionDetailService
-    //     .toggleFavorite(imageId, this.isFavorite)
-    //     .subscribe((res) => {
-    //       console.log(res);
-    //     });
-    // } else {
-    //   this.isFavorite = true;
-    //   this.sessionDetailService
-    //     .toggleFavorite(imageId, this.isFavorite)
-    //     .subscribe((res) => {
-    //       console.log(res);
-    //     });
-    // }
   }
 
   shareSession() {
     console.log("Clicked share session");
+    this.changeUsername();
+  }
+
+  async changeUsername() {
+    const alert = await this.alertCtrl.create({
+      header: " Please tell us something about your discover",
+      buttons: [
+        "Cancel",
+        {
+          text: "Share",
+          handler: (data: any) => {
+
+            console.log(this.session);
+            this.sessionDetailService
+              .shareImage(
+                this.session.photo_id,
+                this.session.url,
+                this.session.style,
+                data
+              )
+              .subscribe(
+                (res) => {
+                  this.succesShared();
+                },
+                (err) => {
+                  this.presentErrorToast("Error");
+                }
+              );
+          },
+        },
+      ],
+      inputs: [
+        {
+          type: "text",
+          name: "message",
+          value: this.message,
+          placeholder: "message",
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+  async succesShared() {
+    const alert = await this.alertCtrl.create({
+      header: "Your photo has been succesfully shared",
+      buttons: [
+        {
+          text: "Go to voting page",
+          handler: (data: any) => {
+            console.log("hey");
+            this.router.navigateByUrl("/top");
+          },
+        },
+        "Stay here",
+      ],
+    });
+    await alert.present();
   }
 
   deleteSession() {
@@ -271,6 +285,34 @@ export class SessionDetailPage {
       buttons: [
         {
           side: "start",
+          icon: "star",
+          handler: () => {
+            console.log("Star clicked");
+          },
+        },
+      ],
+    });
+    toast.present();
+  }
+
+  async presentSuccessShare(text) {
+    const toast = await this.toastController.create({
+      position: "bottom",
+      duration: 120000,
+      color: "success",
+      cssClass: "toast-custom-class",
+      buttons: [
+        {
+          side: "start",
+          text: "Stay here",
+          icon: "star",
+          handler: () => {
+            console.log("Star clicked");
+          },
+        },
+        {
+          side: "start",
+          text: "Go to voting page",
           icon: "star",
           handler: () => {
             console.log("Star clicked");
