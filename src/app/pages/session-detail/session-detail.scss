@@ -131,3 +131,31 @@ ion-content {
 .ion-row {
   --padding-top: 40vh !important;
 }
+
+.question{
+  font-weight:100!important;
+  margin-left:12px!important;
+  font-size:13px;
+}
+
+.about{
+  text-align:justify;
+  font-weight:100!important;
+  font-size:13px;
+  line-height: 16px;
+  height: 32px;
+  overflow: hidden;
+  margin-bottom:0px;
+}
+
+.show {
+  overflow: visible;
+  height: auto;
+}
+
+.show-button{
+  font-size:13px!important;
+  font-weight:500!important;
+  margin-top:0px;
+  --color:var(dark)!important;
+}

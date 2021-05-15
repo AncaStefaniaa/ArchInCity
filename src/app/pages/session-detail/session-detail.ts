@@ -30,6 +30,8 @@ export class SessionDetailPage {
   defaultHref = "";
   architecturalStyles: any;
   message: string;
+  show: boolean = false;
+
   @ViewChild("mapCanvas", { static: true }) mapElement: ElementRef;
 
   constructor(
@@ -177,7 +179,6 @@ export class SessionDetailPage {
         {
           text: "Share",
           handler: (data: any) => {
-
             console.log(this.session);
             this.sessionDetailService
               .shareImage(

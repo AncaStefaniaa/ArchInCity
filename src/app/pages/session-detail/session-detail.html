@@ -33,28 +33,36 @@
     <div class="ion-text-center image-box">
       <img class="session-image" [src]="session.url" />
     </div>
+
     <ion-row>
       <ion-col size="12" class="album-info">
-        <p>{{architecturalStyles[session.style].name}}</p>
-        <span>Date and time {{session.datetime}}</span>
-      </ion-col>
+        <h1>{{architecturalStyles[session.style].name}}</h1>
+        <p class="about" [class.show]="show">
+          {{architecturalStyles[session.style].about}}
+        </p>
+        <a (click)="show = !show" class="show-button">Show more</a>
+        <h4 size="12" class="album-info">Main style characteristics</h4>
+        <p class="question">Can you recognise them in your photo?</p>
 
-      <ion-card>
-        <h4>
-          <ion-icon name="paper-plane" color="dark"></ion-icon
-          >{{session.address}}
-        </h4>
-      </ion-card>
-      <ion-card>
-        <ion-chip color="danger">
+        <ion-chip
+          *ngFor="let ch of architecturalStyles[session.style].characteristics"
+          color="medium"
+        >
+          <ion-icon name="brush" color="dark"></ion-icon>
+          <ion-label>{{ch}}</ion-label>
+        </ion-chip>
+
+        <h4 size="12" class="album-info">Your photo</h4>
+
+        <ion-chip color="success">
+          <ion-icon name="paper-plane" color="dark"></ion-icon>
+          <ion-label>{{session.address}}</ion-label>
+        </ion-chip>
+        <ion-chip color="warning">
           <ion-icon name="calendar" color="dark"></ion-icon>
           <ion-label>{{session.datetime}}</ion-label>
         </ion-chip>
-        <ion-chip color="success">
-          <ion-icon name="brush" color="dark"></ion-icon>
-          <ion-label>{{architecturalStyles[session.style].name}}</ion-label>
-        </ion-chip>
-      </ion-card>
+      </ion-col>
     </ion-row>
   </div>
 
