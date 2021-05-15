@@ -30,17 +30,14 @@ export class TopPage {
     this.architecturalStyles = architecturalStyles;
     this.topService.getTop().subscribe((res) => {
       this.dataArray = res["result"];
-      console.log(this.dataArray);
+      this.dataArray.sort((a, b) =>
+        a.voteUserIds.length < b.voteUserIds.length ? 1 : -1
+      );
     });
   }
 
   updateSection() {
     console.log(this.segment);
-    // if (this.segment === "top") {
-    //   this.segment = "recomended";
-    // } else {
-    //   this.segment = "top";
-    // }
   }
 
   async presentToast(text) {

@@ -73,6 +73,7 @@ export class SignupPage {
           console.log(res);
           this.presentSuccessToast("You have successfully signed in");
           this.userData.signup(this.signup.username);
+          this.userData.saveToLocalStorage(this.signup.email, res.result);
           this.router.navigateByUrl("/app/tabs/discover");
         },
         (err) => {
