@@ -100,28 +100,94 @@ export const architecturalStyles: any[] = [
     about:
       "Georgian architecture is the name given in most English-speaking countries to the set of architectural styles current between 1714 and 1830. It is named after the first four British monarchs of the House of Hanover—George I, George II, George III, and George IV—who reigned in continuous succession from August 1714 to June 1830. The style was revived in the late 19th century in the United States as Colonial Revival architecture and in the early 20th century in Great Britain as Neo-Georgian architecture; in both it is also called Georgian Revival architecture. In the United States the term 'Georgian' is generally used to describe all buildings from the period, regardless of style; in Britain it is generally restricted to buildings that are 'architectural in intention', and have stylistic characteristics that are typical of the period, though that covers a wide range.",
     origins: ["between 1714 and 1830", "Great Britain"],
-    characteristics:[
+    characteristics: [
       "marked by symmetry",
-      "proportion based on the classical architecture "
+      "proportion based on the classical architecture ",
     ],
-    wikipedia:"https://en.wikipedia.org/wiki/Georgian_architecture",
-    image:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Massachusetts_Hall%2C_Harvard_University.JPG/330px-Massachusetts_Hall%2C_Harvard_University.JPG"
-  },
-  { name: "Gothic", id: 15 },
-  { name: "Greek Revival", id: 16 },
-  { name: "International style", id: 17 },
-  { name: "Novelty", id: 18 },
-  { name: "Palladian", id: 19 },
-  { name: "Postmodern", id: 20 },
-  {
-    name: "Queen Anne",
-    id: 21,
+    wikipedia: "https://en.wikipedia.org/wiki/Georgian_architecture",
     image:
-      "https://www.thoughtco.com/thmb/UWQq1xhkEKjD0ixd5_dFxTPmVqE=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/architecture-queenanne-Pollock-Capps-House-564106841-5abdaea2c67335003757ef89.jpg",
-    about:
-      "The Queen Anne style in British architecture refers to either the English Baroque architectural style that developed around the time of Queen Anne (who reigned from 1702 to 1714) or a revived form that became popular during the last quarter of the 19th century and the early decades of the 20th century (which is known as Queen Anne Revival).In other English-speaking parts of the world, Queen Anne style refers to entirely different styles.",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Massachusetts_Hall%2C_Harvard_University.JPG/330px-Massachusetts_Hall%2C_Harvard_University.JPG",
   },
-  { name: "Romanesque", id: 22 },
-  { name: "Russian Revival", id: 23 },
-  { name: "Tudor Revival", id: 24 },
+  {
+    name: "Gothic",
+    id: 8,
+    about:
+      "Gothic architecture (or pointed architecture) is an architectural style that was particularly popular in Europe from the late 12th century to the 16th century, during the High and Late Middle Ages, surviving into the 17th and 18th centuries in some areas. It evolved from Romanesque architecture and was succeeded by Renaissance architecture. It originated in the Île-de-France region of northern France as a development of Norman architecture. The style at the time was sometimes known as opus Francigenum (lit. French work); the term Gothic was first applied contemptuously during the later Renaissance, by those ambitious to revive the Grecian orders of architecture.",
+    origins: ["Europe", "late 12th century to the 16th century"],
+    characteristics: [
+      "architecture of many castles",
+      "large stained glass windows",
+    ],
+    wikipedia: "https://en.wikipedia.org/wiki/Gothic_architecture",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Prag%2C_Prager_Burg%2C_Veitsdom_--_2019_--_6662.jpg/330px-Prag%2C_Prager_Burg%2C_Veitsdom_--_2019_--_6662.jpg",
+  },
+  {
+    name: "Neoclasical",
+    id: 9,
+    about:
+      "Neoclassical architecture is an architectural style produced by the Neoclassical movement that began in the mid-18th century in Italy and France which then became one of the most prominent and iconic architectural styles in the Western World.",
+    origins: ["mid-18th century", "Italy and France"],
+    characteristics: [
+      "emphasizes the wall rather than chiaroscuro",
+      "large stained glass windows",
+    ],
+    wikipedia: "https://en.wikipedia.org/wiki/Neoclassical_architecture",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Ch%C3%A2teau_de_Bagatelle%2C_Paris_17_July_2016_004.jpg/450px-Ch%C3%A2teau_de_Bagatelle%2C_Paris_17_July_2016_004.jpg",
+  },
+  {
+    name: "Novelty",
+    id: 10,
+    about:
+      "Novelty architecture, also called programmatic or mimetic architecture, is a type of architecture in which buildings and other structures are given unusual shapes for purposes such as advertising or to copy other famous buildings without any intention of being authentic. Their size and novelty means that they often serve as landmarks. They are distinct from architectural follies, in that novelty architecture is essentially usable buildings in eccentric form whereas follies are non-usable, ornamental buildings often in eccentric form.",
+    characteristics: ["structures are given unusual shapes for purposes"],
+    origins: ["United States", "1930s"],
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Elefant_der_Bastille.jpg/330px-Elefant_der_Bastille.jpg",
+    wikipedia:
+      "https://en.wikipedia.org/wiki/Novelty_architecture#:~:text=Novelty%20architecture%2C%20also%20called%20programmatic,any%20intention%20of%20being%20authentic.",
+  },
+  {
+    name: "Postmodern",
+    id: 11,
+    about:
+      "Postmodern architecture is a style or movement which emerged in the 1960s as a reaction against the austerity, formality, and lack of variety of modern architecture, particularly in the international style advocated by Philip Johnson and Henry-Russell Hitchcock. The movement was introduced by the architect and urban planner Denise Scott Brown and architectural theorist Robert Venturi in their book Learning from Las Vegas. The style flourished from the 1980s through the 1990s, particularly in the work of Scott Brown & Venturi, Philip Johnson, Charles Moore and Michael Graves. In the late 1990s, it divided into a multitude of new tendencies, including high-tech architecture, neo-futurism and deconstructivism.",
+    origins:["1960s", "International"],
+    characteristics: ["Bright Colours", "eye-catching and whimsical buildings"],
+    wikipedia:"https://en.wikipedia.org/wiki/Postmodern_architecture",
+    image:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/US-CO_-_Denver_-_Library_%284891836173%29.jpg/678px-US-CO_-_Denver_-_Library_%284891836173%29.jpg"
+  },
+  { name: "Romanesque", 
+    id: 12,
+    about:"Romanesque architecture is an architectural style of medieval Europe characterized by semi-circular arches. There is no consensus for the beginning date of the Romanesque style, with proposals ranging from the 6th to the 11th century, this later date being the most commonly held. In the 12th century it developed into the Gothic style, marked by pointed arches. Examples of Romanesque architecture can be found across the continent, making it the first pan-European architectural style since Imperial Roman architecture. The Romanesque style in England is traditionally referred to as Norman architecture.",
+    origins:["6th to the 11th century", "England and Portugal"],
+    characteristics: ["very regular, symmetrical plan", "the overall appearance is one of simplicity"],
+    wikipedia:"https://en.wikipedia.org/wiki/Romanesque_architecture#:~:text=Romanesque%20architecture%20is%20an%20architectural,being%20the%20most%20commonly%20held.",
+    image:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Maria_Lach_02.jpg/465px-Maria_Lach_02.jpg" 
+  },
+  { name: "Russian Revival",
+    id: 13,
+    about:"The Russian Revival architecture arose within the framework that the renewed interest in the national architecture, which evolved in Europe in the 19th century, and it is an interpretation and stylization of the Russian architectural heritage. Sometimes, Russian Revival architecture is often erroneously called Russian or Old-Russian architecture, but the majority of Revival architects did not directly reproduce the old architectural tradition.Like the Romantic revivals of Western Europe, the Russian Revival was informed by a scholarly interest in the historic monuments of the nation. The historicism resonated with the popular nationalism and pan-Slavism of the period. The first illustrated account of Russian architecture was the project of Anatoly Nikolaievich Demidov, 1st Prince of San Donato and French draughtsman André Durand, the record of their 1839 tour of Russia was published in Paris in the 1840s. ",
+    origins:["19th century", "Europe"],
+    characteristics: ["'pot-bellied' columns", "low arched ceilings"],
+    wikipedia:"https://en.wikipedia.org/wiki/Russian_Revival_architecture",
+    image:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Moscow_BolshayaYakimanka43_X10.jpg/390px-Moscow_BolshayaYakimanka43_X10.jpg",
+   },
+  { name: "Tudor Revival", 
+    id: 14,
+    about:"Tudor Revival architecture (also known as mock Tudor in the UK) first manifested itself in domestic architecture in the United Kingdom in the latter half of the 19th century. Based on revival of aspects that were perceived as Tudor architecture, in reality it usually took the style of English vernacular architecture of the Middle Ages that had survived into the Tudor period. The style later became an influence elsewhere, especially the British colonies. For example, in New Zealand, the architect Francis Petre adapted the style for the local climate. In Singapore, then a British colony, architects such as R. A. J. Bidwell pioneered what became known as the Black and White House. The earliest examples of the style originate with the works of such eminent architects as Norman Shaw and George Devey, in what at the time was considered Neo-Tudor design.",
+    origins:["19th century", "Europe"],
+    characteristics: ["'pot-bellied' columns", "low arched ceilings"],
+    wikipedia:"https://en.wikipedia.org/wiki/Tudor_Revival_architecture",
+    image:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Ascott_House.jpg/450px-Ascott_House.jpg"
+   },
+  { name: "No architecture", 
+    id: 15,
+    about: "No architecture",
+    origins: ["No architecture"],
+    characteristics:["No architecture"],
+    wikipedia: "No architecture",
+    image:"http://www.hibamagazine.com/wp-content/uploads/2017/08/Art-of-saying-No.jpg"
+   },
 ];

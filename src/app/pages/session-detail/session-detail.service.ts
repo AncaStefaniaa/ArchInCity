@@ -13,19 +13,19 @@ export class SessionDetailService {
   ) {}
 
   getAllImages() {
-    const userData = JSON.parse(localStorage.getItem("userData"));
+    // const userData = JSON.parse(localStorage.getItem("userData"));
 
     return this.httpClient.get("http://192.168.1.193:3000/get_images", {
       params: {
-        userId: userData.userId,
+        userId: "1",
       },
     });
   }
 
   deleteSession(sessionId) {
-    const userData = JSON.parse(localStorage.getItem("userData"));
+    // const userData = JSON.parse(localStorage.getItem("userData"));
     let body = {
-      userId: userData.userId,
+      userId: 1,
       photoId: sessionId,
     };
 
@@ -49,7 +49,7 @@ export class SessionDetailService {
   shareImage(sessionId, url, style, message) {
     const userData = JSON.parse(localStorage.getItem("userData"));
     let body = {
-      userId: userData.userId,
+      userId: 1,
       photoId: sessionId,
       message: message.message,
       archStyle: style,
