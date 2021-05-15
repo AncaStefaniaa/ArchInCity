@@ -116,7 +116,7 @@ export class SchedulePage implements OnInit {
     }
 
     if (this.segment === "all") {
-      if (isSearching) {
+      if (isSearching || this.queryText.length > 0) {
         this.userData = this.filterBySearch(this.backupData, this.queryText);
       } else {
         this.userData = this.backupData;
@@ -138,7 +138,7 @@ export class SchedulePage implements OnInit {
         return true;
       });
 
-      if (isSearching) {
+      if (isSearching || this.queryText.length > 0) {
         this.userData = this.filterBySearch(tmpData, this.queryText);
       } else {
         this.userData = tmpData;

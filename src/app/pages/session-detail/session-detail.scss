@@ -146,6 +146,7 @@ ion-content {
   height: 32px;
   overflow: hidden;
   margin-bottom:0px;
+  margin-right: 20px;
 }
 
 .show {
@@ -158,4 +159,16 @@ ion-content {
   font-weight:500!important;
   margin-top:0px;
   --color:var(dark)!important;
+}
+
+.location-container {
+  display: flex;
+  justify-content: center;
+  margin-right: 20px;
+}
+
+.time-container {
+  display: flex;
+  justify-content: center;
+  margin-left: -30px;
 }

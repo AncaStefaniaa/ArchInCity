@@ -47,6 +47,7 @@ export class SessionDetailPage {
   ) {}
 
   async ionViewDidEnter() {
+    this.presentLoadingPage();
     this.defaultHref = `/app/tabs/schedule`;
 
     this.architecturalStyles = architecturalStyles;
@@ -54,6 +55,8 @@ export class SessionDetailPage {
       const sessionId = this.route.snapshot.paramMap.get("sessionId");
 
       let build = res["result"][parseInt(sessionId)];
+
+      build.address = this.formatAddress(build.address);
 
       this.session = build;
       this.isFavorite = build.favorite;
@@ -148,6 +151,7 @@ export class SessionDetailPage {
         });
 
       this.userProvider.removeFavorite(this.session.id);
+      this.presentWarningToast("The photo was removed from Favorites!");
     } else {
       this.isFavorite = true;
       this.sessionDetailService
@@ -157,7 +161,22 @@ export class SessionDetailPage {
         });
 
       this.userProvider.addFavorite(this.session.id);
+      this.presentSuccessToast("The photo was added to Favorites!");
     }
+  }
+
+  formatAddress(address) {
+    let formatted = "";
+
+    for (let ch of address) {
+      formatted += ch;
+
+      if (ch === ",") {
+        formatted += " ";
+      }
+    }
+
+    return formatted;
   }
 
   shareSession() {
@@ -167,7 +186,7 @@ export class SessionDetailPage {
 
   async shareImage() {
     const alert = await this.alertCtrl.create({
-      header: " Please tell us something about your discover",
+      header: "Please tell us something about your discover",
       buttons: [
         "Cancel",
         {
@@ -220,6 +239,22 @@ export class SessionDetailPage {
     await alert.present();
   }
 
+  async deleteImage() {
+    const alert = await this.alertCtrl.create({
+      header: "Are you sure?",
+      buttons: [
+        "Cancel",
+        {
+          text: "Delete",
+          handler: (data: any) => {
+            this.deleteSession();
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
   deleteSession() {
     let imageId = this.session.photo_id;
     this.presentLoading();
@@ -227,7 +262,6 @@ export class SessionDetailPage {
       this.sessionDetailService.deleteSession(imageId).subscribe(
         (res) => {
           this.presentSuccessToast("Delete successful");
-          console.log("Delete successful");
           setTimeout(() => {
             this.router.navigate(["./app/tabs/schedule"]);
           }, 1000);
@@ -237,6 +271,18 @@ export class SessionDetailPage {
         }
       );
     }, 1000);
+  }
+
+  async presentLoadingPage() {
+    const loading = await this.loadingController.create({
+      cssClass: "my-custom-class",
+      message: "Fetching info for your photo...",
+      duration: 3000,
+      translucent: true,
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
   }
 
   async presentLoading() {
@@ -276,6 +322,25 @@ export class SessionDetailPage {
       position: "bottom",
       duration: 3000,
       color: "success",
+      buttons: [
+        {
+          side: "start",
+          icon: "star",
+          handler: () => {
+            console.log("Star clicked");
+          },
+        },
+      ],
+    });
+    toast.present();
+  }
+
+  async presentWarningToast(text) {
+    const toast = await this.toastController.create({
+      message: text,
+      position: "bottom",
+      duration: 3000,
+      color: "warning",
       buttons: [
         {
           side: "start",

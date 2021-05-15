@@ -50,3 +50,19 @@ width: 210%;
 ion-label{
   color:success;
 }
+
+.button-hide {
+  visibility: hidden;
+}
+
+.no-data-cl {
+  text-align: center;
+}
+
+:host ::ng-deep .item-native{
+  height: 150px!important;
+}
+
+.image-shadow{
+  height: 100px!important;
+}

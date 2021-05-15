@@ -16,7 +16,7 @@
       <ion-button (click)="shareSession()">
         <ion-icon slot="icon-only" name="share"></ion-icon>
       </ion-button>
-      <ion-button (click)="deleteSession()">
+      <ion-button (click)="deleteImage()">
         <ion-icon
           class="trash"
           slot="icon-only"
@@ -41,7 +41,7 @@
           {{architecturalStyles[session.style].about}}
         </p>
         <a (click)="show = !show" class="show-button">Show more</a>
-        <h4 size="12" class="album-info">Main style characteristics</h4>
+        <h5 size="12" class="album-info">Main style characteristics</h5>
         <p class="question">Can you recognise them in your photo?</p>
 
         <ion-chip
@@ -52,16 +52,22 @@
           <ion-label>{{ch}}</ion-label>
         </ion-chip>
 
-        <h4 size="12" class="album-info">Your photo</h4>
+        <h5 size="12" class="album-info">Photo infos</h5>
 
-        <ion-chip color="success">
+        <ion-chip color="success" class="location-container">
           <ion-icon name="paper-plane" color="dark"></ion-icon>
           <ion-label>{{session.address}}</ion-label>
         </ion-chip>
-        <ion-chip color="warning">
-          <ion-icon name="calendar" color="dark"></ion-icon>
-          <ion-label>{{session.datetime}}</ion-label>
-        </ion-chip>
+        <div class="time-container">
+          <ion-chip color="warning">
+            <ion-icon name="calendar" color="dark"></ion-icon>
+            <ion-label>{{session.datetime.split(', ')[0]}}</ion-label>
+          </ion-chip>
+          <ion-chip color="warning">
+            <ion-icon name="time" color="dark"></ion-icon>
+            <ion-label>{{session.datetime.split(', ')[1]}}</ion-label>
+          </ion-chip>
+        </div>
       </ion-col>
     </ion-row>
   </div>
