@@ -15,7 +15,7 @@ export class SeeFeedbackPage {
   constructor(private seeFeedbackService: SeeFeedbackService) {}
   ngOnInit() {
     this.seeFeedbackService.getFeedback().subscribe((res) => {
-      this.data = res;
+      this.data = res["result"];
 
       Object.values(this.data).forEach((element) => {
         this.dataArray.push(element);

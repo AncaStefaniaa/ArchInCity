@@ -51,16 +51,13 @@ export class SessionDetailPage {
 
     this.architecturalStyles = architecturalStyles;
     this.sessionDetailService.getAllImages().subscribe((res) => {
-      console.log(res["result"]);
       const sessionId = this.route.snapshot.paramMap.get("sessionId");
-      for (const build of res["result"]) {
-        if (build && build.id == sessionId) {
-          this.session = build;
-          this.isFavorite = build.favorite;
-          this.constructMap();
-          break;
-        }
-      }
+
+      let build = res["result"][parseInt(sessionId)];
+
+      this.session = build;
+      this.isFavorite = build.favorite;
+      this.constructMap();
     });
   }
 
@@ -77,8 +74,6 @@ export class SessionDetailPage {
     );
 
     let map;
-    console.log("hey");
-    console.log(this.mapElement);
     // this.confData.getMap().subscribe((mapData: any) => {
     const mapEle = this.mapElement.nativeElement;
 
@@ -89,7 +84,6 @@ export class SessionDetailPage {
         lng: parseFloat(this.session.longitude),
       },
     ];
-    console.log(mapData);
 
     map = new googleMaps.Map(mapEle, {
       center: mapData.find((d: any) => d.center),
@@ -168,10 +162,10 @@ export class SessionDetailPage {
 
   shareSession() {
     console.log("Clicked share session");
-    this.changeUsername();
+    this.shareImage();
   }
 
-  async changeUsername() {
+  async shareImage() {
     const alert = await this.alertCtrl.create({
       header: " Please tell us something about your discover",
       buttons: [
@@ -179,7 +173,6 @@ export class SessionDetailPage {
         {
           text: "Share",
           handler: (data: any) => {
-            console.log(this.session);
             this.sessionDetailService
               .shareImage(
                 this.session.photo_id,

@@ -23,10 +23,8 @@ export class UserData {
       this.favorites = [];
       allImages = res["result"];
 
-      console.log("weee");
-      console.log(allImages);
       allImages.forEach((element) => {
-        if (element.favorite == "true") {
+        if (element.favorite) {
           this.addFavorite(element.id);
         }
       });

@@ -13,19 +13,19 @@ export class SessionDetailService {
   ) {}
 
   getAllImages() {
-    // const userData = JSON.parse(localStorage.getItem("userData"));
+    const userData = JSON.parse(localStorage.getItem("userData"));
 
     return this.httpClient.get("http://192.168.1.193:3000/get_images", {
       params: {
-        userId: "1",
+        userId: userData ? userData.userId : 0,
       },
     });
   }
 
   deleteSession(sessionId) {
-    // const userData = JSON.parse(localStorage.getItem("userData"));
+    const userData = JSON.parse(localStorage.getItem("userData"));
     let body = {
-      userId: 1,
+      userId: userData.userId,
       photoId: sessionId,
     };
 
@@ -33,8 +33,6 @@ export class SessionDetailService {
   }
 
   toggleFavorite(sessionId, isFavorite) {
-    // const userData = JSON.parse(localStorage.getItem("userData"));
-
     let body = {
       isFavorite: isFavorite,
       photoId: sessionId,
