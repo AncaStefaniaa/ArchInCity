@@ -49,7 +49,7 @@ export class SessionDetailService {
   shareImage(sessionId, url, style, message) {
     const userData = JSON.parse(localStorage.getItem("userData"));
     let body = {
-      userId: 1,
+      userId: userData.userId,
       photoId: sessionId,
       message: message.message,
       archStyle: style,

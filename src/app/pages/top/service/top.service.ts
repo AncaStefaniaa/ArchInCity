@@ -18,14 +18,12 @@ export class TopService {
     return this.httpClient.get("http://192.168.1.193:3000/shared_photos");
   }
 
-  addLike(photoId){
-    const userData = JSON.parse(localStorage.getItem("userData"));
-    console.log(userData);
+  addLike(userId, photoId){
     let body = {
-      userId: userData.userId,
+      userId: userId,
       photoId: photoId
     };
-        console.log(body);
+    
     return this.httpClient.post("http://192.168.1.193:3000/vote_photo", body);
   }
 }
