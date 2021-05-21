@@ -43,7 +43,7 @@
             </ion-item>
           </ion-menu-toggle>
 
-          <ion-menu-toggle *ngIf="!isAdmin" autoHide="false">
+          <ion-menu-toggle *ngIf="!isAdmin && loggedIn" autoHide="false">
             <ion-item
               routerLink="/support"
               routerLinkActive="active"
@@ -55,7 +55,7 @@
             </ion-item>
           </ion-menu-toggle>
 
-          <ion-menu-toggle *ngIf="isAdmin" autoHide="false">
+          <ion-menu-toggle *ngIf="isAdmin && loggedIn" autoHide="false">
             <ion-item
               routerLink="/see-feedback"
               routerLinkActive="active"
@@ -90,7 +90,7 @@
             </ion-item>
           </ion-menu-toggle>
 
-          <ion-menu-toggle autoHide="false">
+          <!-- <ion-menu-toggle autoHide="false">
             <ion-item
               routerLink="/support"
               routerLinkActive="active"
@@ -100,7 +100,7 @@
               <ion-icon slot="start" name="help"></ion-icon>
               <ion-label> Send feedback </ion-label>
             </ion-item>
-          </ion-menu-toggle>
+          </ion-menu-toggle> -->
 
           <ion-menu-toggle autoHide="false">
             <ion-item

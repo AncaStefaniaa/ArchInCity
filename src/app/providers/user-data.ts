@@ -8,6 +8,7 @@ import { SessionDetailService } from "../pages/session-detail/session-detail.ser
 })
 export class UserData {
   favorites: string[];
+  isAdmin: boolean = false;
   HAS_LOGGED_IN = "hasLoggedIn";
   HAS_SEEN_TUTORIAL = "hasSeenTutorial";
 
@@ -19,7 +20,6 @@ export class UserData {
     let allImages = [];
 
     this.sessionDetailService.getAllImages().subscribe((res) => {
-      console.log(res);
       this.favorites = [];
       allImages = res["result"];
 
@@ -54,11 +54,22 @@ export class UserData {
   }
 
   saveToLocalStorage(username, userId) {
+    console.log(username)
+    console.log("in userData")
+
+    if (username == "admin@admin.com") {
+      this.isAdmin = true;
+    }else{
+      this.isAdmin = false;
+    }
+
     const userData = {
       username: username,
       userId: userId,
+      isAdmin: this.isAdmin
     };
-    console.log(userData);
+
+    console.log(this.isAdmin)
     localStorage.setItem("userData", JSON.stringify(userData));
   }
 
@@ -70,6 +81,14 @@ export class UserData {
   }
 
   logout(): Promise<any> {
+    const userData = {
+      username: "",
+      userId: "",
+      isAdmin: false
+    };
+
+    localStorage.setItem("userData", JSON.stringify(userData));
+
     return this.storage
       .remove(this.HAS_LOGGED_IN)
       .then(() => {

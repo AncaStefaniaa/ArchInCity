@@ -1,6 +1,16 @@
 
 ion-segment {
   margin-top: -15px;
+  --ion-background-color:#f0f0f0;
+}
+
+ion-content {
+  --ion-background-color: linear-gradient(0deg, rgba(224, 208, 164, 0.808) 0%, #f0f0f0 100%);
+}
+
+.card-container{
+  margin-left:10px;
+  margin-right:10px;
 }
 
 .poster-col {
@@ -54,8 +64,9 @@ h5 {
 
 @media (min-width: 0px) {
   .images {
-    margin-top: 5px;
+    margin-top: 10px;
     column-count: 2;
+    column-gap: 1px;
   }
 }
 
@@ -63,6 +74,7 @@ h5 {
   .images {
     margin-top: 5px;
     column-count: 3;
+    column-gap:2px;
   }
 }
 
@@ -74,16 +86,9 @@ h5 {
 }
 
 .one-image {
-  margin: 2px;
+  margin-bottom: 5px;
   position: relative;
-}
-
-img-details {
-  width: 50px !important;
-  position: absolute;
-  bottom: 0px;
-  height: 50px !important;
-  background-color: bisque;
+  page-break-inside: avoid;
 }
 
 ::ng-deep {
@@ -99,8 +104,10 @@ img-details {
 
   .top-label {
     margin-top: 5px;
-    margin-bottom: 10px;
+    margin-bottom:0px;
     margin-left: 9px;
+    text-align:justify;
+    margin-right:9px
   }
 }
 
@@ -116,4 +123,42 @@ img-details {
 
 .like-section{
  margin-left:10px;
+ display:flex;
+ height:18px;
+}
+
+.like-container{
+  padding-bottom:8px;
+  --ion-background-color:#f0f0f0;
+}
+
+.heart-icon{
+  font-size:20px;
+}
+
+.like-label{
+  margin-top: 3px;
+  margin-left: 6px;
+}
+
+.star-icon{
+  font-size:25px;
+
+}
+
+.star-style{
+  font-weight:bold;
+  margin-top:20px;
+  font-size:25px;
+}
+
+.rate-container{
+  display: flex;
+    justify-content: center;
+}
+
+.vote-label{
+  margin-top: 3px;
+  margin-left: 6px;
+  font-size:20px;
 }

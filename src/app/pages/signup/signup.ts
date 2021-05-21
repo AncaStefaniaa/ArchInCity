@@ -70,14 +70,12 @@ export class SignupPage {
     if (form.valid) {
       this.signUpService.signUpUser(this.signup).subscribe(
         (res) => {
-          console.log(res);
           this.presentSuccessToast("You have successfully signed in");
           this.userData.signup(this.signup.username);
           this.userData.saveToLocalStorage(this.signup.email, res.result);
           this.router.navigateByUrl("/app/tabs/discover");
         },
         (err) => {
-          console.log(err);
           this.presentErrorToast(err.error);
         }
       );

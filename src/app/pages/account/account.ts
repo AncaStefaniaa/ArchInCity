@@ -66,6 +66,8 @@ export class AccountPage implements AfterViewInit {
     this.userData.getUsername().then((username) => {
       this.username = username;
     });
+
+    this.username = JSON.parse(localStorage.getItem("userData")).username;
   }
 
   async changePassword() {

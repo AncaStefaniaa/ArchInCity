@@ -12,7 +12,8 @@ import {architecturalStyles} from '../discover/discover.columns';
 export class SpeakerDetailPage {
   speaker: any;
   buildings: any[] = [];
-
+  show: boolean = false;
+  
   constructor(
     private route: ActivatedRoute,
     public actionSheetCtrl: ActionSheetController,

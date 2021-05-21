@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
       title: "Map",
       url: "/app/tabs/map",
       icon: "map",
-      visible: true,
+      visible: false,
     },
     {
       title: "About",
@@ -81,9 +81,10 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     this.user = JSON.parse(localStorage.getItem("userData")).username;
-    if (this.user == "admin@admin.com") {
-      this.isAdmin = true;
-    }
+    this.isAdmin = JSON.parse(localStorage.getItem("userData")).isAdmin;
+    // if (this.user == "admin@admin.com") {
+    //   this.isAdmin = true;
+    // }
     console.log(this.isAdmin);
     this.checkLoginStatus();
     this.listenForLoginEvents();
@@ -125,6 +126,7 @@ export class AppComponent implements OnInit {
   updateLoggedInStatus(loggedIn: boolean) {
     setTimeout(() => {
       this.loggedIn = loggedIn;
+      this.isAdmin = JSON.parse(localStorage.getItem("userData")).isAdmin;
     }, 300);
   }
 

@@ -56,7 +56,15 @@
                 routerLink="/app/tabs/over-time/speaker-details/{{speaker.id}}"
               >
                 <ion-label>
-                  <h3>About {{speaker.name}}</h3>
+                  <!-- <h3>About {{speaker.name}}</h3> -->
+                  <ion-chip color="primary">
+                    <ion-icon name="hourglass" color="dark"></ion-icon>
+                    <ion-label>{{speaker?.origins[0]}}</ion-label>
+                  </ion-chip>
+                  <ion-chip color="primary">
+                    <ion-icon name="globe" color="dark"></ion-icon>
+                    <ion-label>{{speaker?.origins[1]}}</ion-label>
+                  </ion-chip>
                 </ion-label>
               </ion-item>
             </ion-list>

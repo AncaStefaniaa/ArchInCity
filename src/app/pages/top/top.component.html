@@ -32,24 +32,26 @@ top
               </div>
             </ion-col>
             <ion-col size="12">
-              <h4 class="ion-no-margin">
+              <h4 class=" star-style ion-no-margin">
                 {{ architecturalStyles[item.archStyle].name }}
               </h4>
-              <h4 class="ion-no-margin rate">
-                <ion-icon name="star"></ion-icon>
-                {{ item.voteUserIds.length }}
-              </h4>
+              by {{item.postedBy}}
+
+              <div class="ion-no-margin rate rate-container">
+                <ion-icon class="star-icon" name="star"></ion-icon>
+                <p class="vote-label">{{ item.voteUserIds.length }} votes</p>
+              </div>
+
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-slide>
-      <!-- </ng-template> -->
     </ion-slides>
   </div>
 
   <div class="images" *ngIf="segment === 'top'">
     <div class="one-image" *ngFor="let item of dataArray">
-      <ion-card>
+      <ion-card class="card-container">
         <div class="avatar-container">
           <ion-avatar class="top-avatar">
             <img [src]="item.photoUrl" />
@@ -59,7 +61,7 @@ top
 
         <img [src]="item.photoUrl" />
 
-        <div>
+        <div class="like-container">
           <div class="like-section">
             <ion-icon
               (click)="addLike(item.photoId)"
@@ -67,10 +69,11 @@ top
               class="heart-icon"
               name="heart"
             ></ion-icon>
-            {{ item.voteUserIds.length }}
+            <p class="like-label">{{ item.voteUserIds.length }}</p>
           </div>
-          <ion-label class="top-label">{{ item.message }}</ion-label>
+          <p class="top-label">{{ item.message }}</p>
         </div>
+
       </ion-card>
     </div>
   </div>

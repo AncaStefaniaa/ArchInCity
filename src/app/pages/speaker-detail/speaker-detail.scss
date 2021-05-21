@@ -44,9 +44,7 @@ ion-toolbar ion-menu-button {
 
 .speaker-background h2 {
   position: absolute;
-
   bottom: 10px;
-
   color: white;
 }
 
@@ -75,13 +73,50 @@ ion-toolbar ion-menu-button {
   background: var(--ion-color-step-150, #d7d8da);
 }
 
-.style-details {
-  text-align: justify;
-}
 
 .content-title {
   text-align: center;
+  font-weight:700;
 }
+
 .content-chip {
   text-align: center;
+  display:flex;
+}
+
+.style-details {
+  text-align: justify;
+  overflow:hidden;
+  line-height: 16px;
+  height: 126px;
+  margin-bottom:0px;
+}
+
+.show {
+  overflow: visible;
+  height: auto;
+}
+
+.show-button{
+  font-size:13px!important;
+  font-weight:700!important;
+  margin-top:0px;
+  --color:var(dark)!important;
+  margin-left:5px;
+}
+
+.album-info{
+  margin-left:5px;
+}
+
+.origins-chips{
+  display: flex !important;
+}
+
+.chip-content{
+  margin: auto;
+}
+
+.wiki-label{
+  margin-left:3px;
 }
