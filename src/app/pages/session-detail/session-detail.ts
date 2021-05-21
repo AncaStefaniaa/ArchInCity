@@ -52,6 +52,7 @@ export class SessionDetailPage {
 
     this.architecturalStyles = architecturalStyles;
     this.sessionDetailService.getAllImages().subscribe((res) => {
+      this.loadingController.dismiss();
       const sessionId = this.route.snapshot.paramMap.get("sessionId");
 
       let build = res["result"][parseInt(sessionId)];
@@ -277,7 +278,6 @@ export class SessionDetailPage {
     const loading = await this.loadingController.create({
       cssClass: "my-custom-class",
       message: "Fetching info for your photo...",
-      duration: 3000,
       translucent: true,
     });
     await loading.present();
