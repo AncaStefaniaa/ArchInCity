@@ -9,15 +9,50 @@
 
 <ion-content>
   <div *ngIf="username" class="ion-padding-top ion-text-center">
-    <img
-      [src]="accountPhoto"
-      alt="avatar"
-    />
+    <img class="avatar-photo" [src]="accountPhoto" alt="avatar" />
     <h2>{{username}}</h2>
+    <ion-button expand="full" (click)="captureImage()"></ion-button>
+    <img [src]="myImage" />
+
+    <image-cropper
+      [imageBase64]="myImage"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="4 / 3"
+      (imageCropped)="imageCropped($event)"
+      outputType="base64"
+      [canvasRotation]="canvasRotation"
+      [transform]="transform"
+    ></image-cropper>
+    <ion-row>
+      <ion-col size="3">
+        <ion-button fill="outline" (click)="rotateLeft()">
+          <ion-icon name="refresh" slot="start"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button fill="outline" (click)="rotateRight()">
+          <ion-icon name="refresh" slot="start"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button fill="outline" (click)="flipHorizontal()">
+          <ion-icon name="refresh" slot="start"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button fill="outline" (click)="save()">
+          <ion-icon name="refresh" slot="start"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <img *ngIf="croppedImage" [src]="croppedImage" />
 
     <ion-list inset>
       <ion-item (click)="changePassword()">Change Password</ion-item>
-      <ion-item (click)="updatePicture(this.camera.PictureSourceType.PHOTOLIBRARY)">Update Picture</ion-item>
+      <ion-item
+        (click)="updatePicture(this.camera.PictureSourceType.PHOTOLIBRARY)"
+        >Update Picture</ion-item
+      >
       <ion-item (click)="support()">Feedback</ion-item>
       <ion-item (click)="logout()">Logout</ion-item>
     </ion-list>

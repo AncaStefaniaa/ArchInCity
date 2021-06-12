@@ -1,18 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { IonicModule } from "@ionic/angular";
 
-import { AccountPage } from './account';
-import { AccountPageRoutingModule } from './account-routing.module';
+import { AccountPage } from "./account";
+import { AccountPageRoutingModule } from "./account-routing.module";
+import { ImageCropperModule } from "ngx-image-cropper";
 
 @NgModule({
   imports: [
     CommonModule,
     IonicModule,
-    AccountPageRoutingModule
+    AccountPageRoutingModule,
+    ImageCropperModule,
   ],
-  declarations: [
-    AccountPage,
-  ]
+  declarations: [AccountPage],
 })
-export class AccountModule { }
+export class AccountModule {}
