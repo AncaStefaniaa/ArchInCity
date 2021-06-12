@@ -14,7 +14,7 @@ export class SignUpService {
 
   signUpUser(formData) {
     return this.httpClient.post<any>(
-      "http://192.168.1.193:3000/register",
+      "http://192.168.1.161:3000/register",
       formData
     );
   }

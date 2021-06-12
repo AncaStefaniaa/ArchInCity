@@ -35,7 +35,7 @@ export class SpeakerDetailPage {
   }
 
   openExternalUrl(url: string) {
-    this.inAppBrowser.create(url, "_blank");
+    this.inAppBrowser.create(this.speaker.wikipedia, "_blank");
   }
 
   async openSpeakerShare(speaker: any) {

@@ -52,23 +52,15 @@ export class MapPage implements AfterViewInit {
       this.constructMapData(this.mapBuildings);
       this.confData.getMap().subscribe((mapData: any) => {
         const mapEle = this.mapElement.nativeElement;
-        console.log(this.mapBuildings);
-        let mapData2 = [
-          { lat: 44.4317345, lng: 26.0524488, center: true },
-          { lat: 44.43175, lng: 26.0524488, center: true },
-        ];
-        mapData = [JSON.parse(localStorage.getItem("coordonates"))];
-        // console.log(mapData);
-        // console.log(mapData.find((d: any) => d.center));
+
         map = new googleMaps.Map(mapEle, {
           center: this.mapBuildings.find((d: any) => d.center),
           zoom: 16,
           styles: style,
         });
 
-        console.log(JSON.parse(localStorage.getItem("coordonates")));
-
         this.mapBuildings.forEach((markerData: any) => {
+
           const infoWindow = new googleMaps.InfoWindow({
             content: `<img width="120" height="100" src="${
               markerData.url
@@ -76,7 +68,7 @@ export class MapPage implements AfterViewInit {
               architecturalStyles[markerData.style].name
             }</h5>`,
           });
-          console.log(markerData["style"]);
+
           const marker = new googleMaps.Marker({
             position: markerData,
             map,

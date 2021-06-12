@@ -7,6 +7,11 @@ import { UserData } from "../../providers/user-data";
 import { AccountService } from "./account.service";
 import { ToastHelper } from "../../providers/toast-helper";
 import { LoadingHelper } from "../../providers/loading-helper";
+import {
+  Camera,
+  CameraOptions,
+  PictureSourceType,
+} from "@ionic-native/camera/ngx";
 
 @Component({
   selector: "page-account",
@@ -15,7 +20,10 @@ import { LoadingHelper } from "../../providers/loading-helper";
 })
 export class AccountPage implements AfterViewInit {
   username: string;
+  userId;
   email: string;
+  accountPhoto: string = "../../../assets/img/user.jpeg";
+
   constructor(
     public alertCtrl: AlertController,
     public router: Router,
@@ -23,20 +31,22 @@ export class AccountPage implements AfterViewInit {
     private toastController: ToastController,
     private accountService: AccountService,
     private toastHelper: ToastHelper,
-    private loadingHelper: LoadingHelper
+    private loadingHelper: LoadingHelper,
+    public camera: Camera,
   ) {}
 
   ngAfterViewInit() {
     this.getUsername();
+    this.getUserPhoto();
   }
 
-  updatePicture() {
-    console.log("Clicked to update picture");
+  getUserPhoto() {
+      this.accountService.getUserPicture(this.userId).subscribe((res) =>{
+        if(res["result"].profile_photo){
+          this.accountPhoto = res["result"].profile_photo;
+        }
+      })
   }
-
-  // Present an alert with the current username populated
-  // clicking OK will update the username and display it
-  // clicking Cancel will close the alert and do nothing
   async changeUsername() {
     const alert = await this.alertCtrl.create({
       header: "Change Username",
@@ -68,6 +78,7 @@ export class AccountPage implements AfterViewInit {
     });
 
     this.username = JSON.parse(localStorage.getItem("userData")).username;
+    this.userId = JSON.parse(localStorage.getItem("userData")).userId;
   }
 
   async changePassword() {
@@ -118,5 +129,26 @@ export class AccountPage implements AfterViewInit {
       duration: 10000,
     });
     toast.present();
+  }
+
+    updatePicture(sourceType: PictureSourceType) {
+
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: sourceType,
+      targetHeight: 500,
+      targetWidth: 500,
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+      console.log(imageData);
+      this.accountService.updatePicture(imageData).subscribe((res) =>{
+        console.log(res);
+        this.accountPhoto = res["result"];
+      })
+    });
   }
 }

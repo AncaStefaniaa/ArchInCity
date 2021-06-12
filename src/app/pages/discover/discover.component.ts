@@ -7,7 +7,6 @@ import {
   Platform,
 } from "@ionic/angular";
 import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
-// import { PhotoService } from "../../services/photo.service";
 import { defineCustomElements } from "@ionic/pwa-elements/loader";
 import {
   Camera,
@@ -26,14 +25,10 @@ import {
 } from "@ionic-native/geolocation/ngx";
 
 import { LoadingController } from "@ionic/angular";
-// import {
-//   BackgroundGeolocation,
-//   BackgroundGeolocationResponse,
-//   BackgroundGeolocationConfig,
-// } from "@ionic-native/background-geolocation/ngx";
 
 import { architecturalStyles } from "./discover.columns";
 import { UserData } from "../../providers/user-data";
+
 const STORAGE_KEY = "my_images";
 
 interface Coordonates {
@@ -84,24 +79,25 @@ export class DiscoverPage implements OnInit {
       timeout: 10000,
       enableHighAccuracy: true,
     };
+
     this.geolocation
       .getCurrentPosition(options)
       .then((resp) => {
         this.currPhotoLatitude = resp.coords.latitude;
         this.currPhotoLongitude = resp.coords.longitude;
+
         const coordonates: Coordonates = {
           lat: resp.coords.latitude,
           lng: resp.coords.longitude,
           center: true,
         };
+
         localStorage.setItem("coordonates", JSON.stringify(coordonates));
 
         this.discoverService
           .getAddress(this.currPhotoLatitude, this.currPhotoLongitude)
           .subscribe((res) => {
-            console.log(res);
             this.address = this.buildAddress(res);
-            console.log(this.address);
           });
       })
       .catch((error) => {
@@ -182,30 +178,34 @@ export class DiscoverPage implements OnInit {
         (res) => {
           this.presentLoading();
           this.buildingStyle = parseInt(res["arch"]);
+          if (this.buildingStyle != 15) {
+            this.discoverService
+              .sendImageUser(
+                imageData,
+                this.buildingStyle,
+                this.currPhotoLatitude,
+                this.currPhotoLongitude,
+                this.address
+              )
+              .subscribe(
+                (res) => {
+                  console.log(res);
+                },
+                (err) => {
+                  console.log(err);
+                }
+              );
 
-          this.discoverService
-            .sendImageUser(
-              imageData,
-              this.buildingStyle,
-              this.currPhotoLatitude,
-              this.currPhotoLongitude,
-              this.address
-            )
-            .subscribe(
-              (res) => {
-                console.log(res);
-              },
-              (err) => {
-                console.log(err);
-              }
-            );
-
-          setTimeout(() => {
-            this.populateCurrentBuildingStyle();
-          }, 3000);
+            setTimeout(() => {
+              this.populateCurrentBuildingStyle();
+            }, 3000);
+          } else {
+            setTimeout(() => {
+              this.presentToast("No architecture found. Please try again.");
+            }, 3000);
+          }
         },
         (err) => {
-          console.log(err);
           this.presentToast(err);
         }
       );

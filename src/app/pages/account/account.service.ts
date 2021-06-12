@@ -13,27 +13,16 @@ export class AccountService {
     private toastController: ToastController
   ) {}
 
+  getUserPicture(userId) {
+    return this.httpClient.get("http://192.168.1.161:3000/get_user_info",{ params: {
+        userId: userId,
+      }})
+  }
+
   changePassword(email) {
     return this.httpClient.post(
-      "http://192.168.1.193:3000/reset_password",
+      "http://192.168.1.161:3000/reset_password",
       email
-    );
-  }
-  findStyle(imageData) {
-    const date = new Date().valueOf();
-    const imageName = date + ".jpeg";
-
-    const imageBlob = this.dataURItoBlob(imageData);
-    const imageFile = new File([imageBlob], imageName, { type: "image/jpeg" });
-
-    let formData = new FormData();
-    formData.append("file", imageBlob, imageName);
-
-    var options = { content: formData };
-
-    return this.httpClient.post<any>(
-      "http://192.168.1.193:3000/arch_recognition",
-      formData
     );
   }
 
@@ -50,4 +39,44 @@ export class AccountService {
 
     return blob;
   }
+
+  updatePicture(imageData){
+    const date = new Date().valueOf();
+    const imageName = date + ".jpeg";
+
+    const imageBlob = this.dataURItoBlob(imageData);
+    const imageFile = new File([imageBlob], imageName, {
+      type: "image/jpeg",
+    });
+
+    console.log(JSON.parse(localStorage.getItem("userData")));
+    const userData = JSON.parse(localStorage.getItem("userData"));
+
+    let formData = new FormData();
+    formData.append("file", imageBlob, imageName);
+    formData.append("userId", userData.userId);
+    console.log(formData);
+    var options = { content: formData };
+    return this.httpClient.post("http://192.168.1.161:3000/change_photo", formData);
+
+  }
+
+  findStyle(imageData) {
+    const date = new Date().valueOf();
+    const imageName = date + ".jpeg";
+
+    const imageBlob = this.dataURItoBlob(imageData);
+    const imageFile = new File([imageBlob], imageName, { type: "image/jpeg" });
+
+    let formData = new FormData();
+    formData.append("file", imageBlob, imageName);
+
+    var options = { content: formData };
+
+    return this.httpClient.post<any>(
+      "http://192.168.1.161:3000/arch_recognition",
+      formData
+    );
+  }
+
 }

@@ -28,6 +28,18 @@ export class AppComponent implements OnInit {
       visible: false,
     },
     {
+      title: "My Buildings",
+      url: "/app/tabs/schedule",
+      icon: "business",
+      visible: false,
+    },
+    {
+      title: "Top Buildings",
+      url: "/top",
+      icon: "flame",
+      visible: false,
+    },
+    {
       title: "Architecture over time",
       url: "/app/tabs/over-time",
       icon: "hourglass",
@@ -44,18 +56,6 @@ export class AppComponent implements OnInit {
       url: "/app/tabs/about",
       icon: "information-circle",
       visible: true,
-    },
-    {
-      title: "My Buildings",
-      url: "/app/tabs/schedule",
-      icon: "business",
-      visible: false,
-    },
-    {
-      title: "Top Buildings",
-      url: "/top",
-      icon: "flame",
-      visible: false,
     },
   ];
 

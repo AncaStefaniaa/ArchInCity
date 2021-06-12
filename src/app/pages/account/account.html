@@ -10,15 +10,14 @@
 <ion-content>
   <div *ngIf="username" class="ion-padding-top ion-text-center">
     <img
-      src="https://mpng.subpng.com/20180523/tha/kisspng-businessperson-computer-icons-avatar-clip-art-lattice-5b0508dc6a3a10.0013931115270566044351.jpg"
+      [src]="accountPhoto"
       alt="avatar"
     />
     <h2>{{username}}</h2>
 
     <ion-list inset>
-      <ion-item (click)="updatePicture()">Update Picture</ion-item>
-      <ion-item (click)="changeUsername()">Change Username</ion-item>
       <ion-item (click)="changePassword()">Change Password</ion-item>
+      <ion-item (click)="updatePicture(this.camera.PictureSourceType.PHOTOLIBRARY)">Update Picture</ion-item>
       <ion-item (click)="support()">Feedback</ion-item>
       <ion-item (click)="logout()">Logout</ion-item>
     </ion-list>

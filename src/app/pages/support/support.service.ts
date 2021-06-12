@@ -19,7 +19,7 @@ export class FeedbackService {
       feedback: formData,
     };
     return this.httpClient.post(
-      "http://192.168.1.193:3000/send_feedback",
+      "http://192.168.1.161:3000/send_feedback",
       body
     );
   }
