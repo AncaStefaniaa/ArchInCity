@@ -15,7 +15,7 @@ export class TopService {
   getTop() {
 
 
-    return this.httpClient.get("http://192.168.1.161:3000/shared_photos");
+    return this.httpClient.get("http://192.168.1.193:3000/shared_photos");
   }
 
   addLike(userId, photoId){
@@ -24,6 +24,6 @@ export class TopService {
       photoId: photoId
     };
     
-    return this.httpClient.post("http://192.168.1.161:3000/vote_photo", body);
+    return this.httpClient.post("http://192.168.1.193:3000/vote_photo", body);
   }
 }

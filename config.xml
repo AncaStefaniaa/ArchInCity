@@ -22,6 +22,7 @@
     <platform name="android">
         <allow-navigation href="*" />
         <allow-intent href="market:*" />
+        <resource-file src="resources/icon.png" target="app/src/main/res/mipmap/icon.png" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
         <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />
@@ -85,5 +86,4 @@
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.1.2" />
     <engine name="ios" spec="^4.5.5" />
-    <engine name="android" spec="7.0.0" />
 </widget>

@@ -44,7 +44,6 @@
     "@ionic/pwa-elements": "^3.0.2",
     "@ionic/storage": "2.2.0",
     "cordova": "^10.0.0",
-    "cordova-android": "^8.1.0",
     "cordova-ios": "^5.1.1",
     "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-inappbrowser": "^3.2.0",
@@ -101,8 +100,8 @@
   "cordova": {
     "platforms": [
       "ios",
-      "android",
-      "browser"
+      "browser",
+      "android"
     ],
     "plugins": {
       "cordova-plugin-device": {},

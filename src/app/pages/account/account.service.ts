@@ -14,14 +14,14 @@ export class AccountService {
   ) {}
 
   getUserPicture(userId) {
-    return this.httpClient.get("http://192.168.1.161:3000/get_user_info",{ params: {
+    return this.httpClient.get("http://192.168.1.193:3000/get_user_info",{ params: {
         userId: userId,
       }})
   }
 
   changePassword(email) {
     return this.httpClient.post(
-      "http://192.168.1.161:3000/reset_password",
+      "http://192.168.1.193:3000/reset_password",
       email
     );
   }
@@ -57,7 +57,7 @@ export class AccountService {
     formData.append("userId", userData.userId);
     console.log(formData);
     var options = { content: formData };
-    return this.httpClient.post("http://192.168.1.161:3000/change_photo", formData);
+    return this.httpClient.post("http://192.168.1.193:3000/change_photo", formData);
 
   }
 
@@ -74,7 +74,7 @@ export class AccountService {
     var options = { content: formData };
 
     return this.httpClient.post<any>(
-      "http://192.168.1.161:3000/arch_recognition",
+      "http://192.168.1.193:3000/arch_recognition",
       formData
     );
   }
