@@ -4,35 +4,13 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-buttons slot="end">
-        <ion-button (click)="presentPopover($event)">
-          <ion-icon
-            slot="icon-only"
-            ios="ellipsis-horizontal"
-            md="ellipsis-vertical"
-          ></ion-icon>
-        </ion-button>
-      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
   <div class="about-header">
-    <!-- Instead of loading an image each time the select changes, use opacity to transition them -->
     <div
-      class="about-image madison"
-      [ngStyle]="location === 'madison' && {'opacity': '1'}"
-    ></div>
-    <div
-      class="about-image austin"
-      [ngStyle]="location === 'austin' && {'opacity': '1'}"
-    ></div>
-    <div
-      class="about-image chicago"
-      [ngStyle]="location === 'chicago' && {'opacity': '1'}"
-    ></div>
-    <div
-      class="about-image seattle"
-      [ngStyle]="location === 'seattle' && {'opacity': '1'}"
+      class="about-image archSmarter"
+      [ngStyle]="app === 'archSmarter' && {'opacity': '1'}"
     ></div>
   </div>
 
@@ -40,51 +18,7 @@
     <h3 class="ion-padding-top ion-padding-start">About</h3>
 
     <p class="ion-padding-start ion-padding-end">
-      Industria IT este intr-o dezvoltare continua, iar societatea se bazeaza
-      din ce in ce mai mult pe astfel de produse fie ele aplicatii, desktop,
-      mobile sau simple programe pe consola. Cand vine vorba, insa, despre o
-      viziune in perspectiva, aplicatiile mobile sau hibride impreuna cu
-      inteligenta artificiala si viziunea artificiala reprezinta piesele care
-      stau la baza constructiei viitorului. Se poate spune ca in ultimul deceniu
-      aplicatiile mobile au prins o imensa aploare.
+      Aplicația reușește să îmbine experiența plăcută de utilizare cu funcționalitățile avansate pe care le oferă. Aceasta prezintă o interfață grafică prietenoasă și intuitivă dezvoltată prin intermediul framework-ului Ionic, iar utilizatorul beneficiază de un rezultat precis reușind, totodată, să obțină răspunsuri la întrebările de genul „Oare din ce stil arhitectural face parte această clădire?”. Altfel zis, ArchSmarter oferă o serie de funcționalități care tratează problema detecției stilului arhitectural prin intermediul unui model ce are la bază rețelele neuronale. Accesul la utilizarea algoritmului de învățare automată este permis în urma creării unui cont în cadrul platformei. Acesta poate afla, prin doar câteva click-uri, stilul arhitectural al clădirii pe care o are în față sau al unei clădiri din cadrul unor poze salvate în telefonul personal.
     </p>
-
-    <h3 class="ion-padding-top ion-padding-start">Details</h3>
-
-    <ion-list lines="none">
-      <ion-item>
-        <ion-label> Location </ion-label>
-        <ion-select [(ngModel)]="location" [interfaceOptions]="selectOptions">
-          <ion-select-option value="madison">Madison, WI</ion-select-option>
-          <ion-select-option value="austin">Austin, TX</ion-select-option>
-          <ion-select-option value="chicago">Chicago, IL</ion-select-option>
-          <ion-select-option value="seattle">Seattle, WA</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label> Date </ion-label>
-        <ion-datetime
-          displayFormat="MMM DD, YYYY"
-          max="2056"
-          [(ngModel)]="conferenceDate"
-        >
-        </ion-datetime>
-      </ion-item>
-    </ion-list>
-
-    <h3 class="ion-padding-top ion-padding-start">Internet</h3>
-
-    <ion-list lines="none">
-      <ion-item>
-        <ion-label> Wifi network </ion-label>
-        <ion-label class="ion-text-end">
-          ica{{conferenceDate | date: 'y'}}
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label> Password </ion-label>
-        <ion-label class="ion-text-end"> makegoodthings </ion-label>
-      </ion-item>
-    </ion-list>
   </div>
 </ion-content>

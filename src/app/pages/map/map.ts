@@ -10,7 +10,7 @@ import { Platform } from "@ionic/angular";
 import { DOCUMENT } from "@angular/common";
 
 import { darkStyle } from "./map-dark-style";
-import { GalleryService } from "../schedule/gallery.service";
+import { GalleryService } from "../my-buildings/gallery.service";
 import { architecturalStyles } from "../discover/discover.columns";
 
 @Component({

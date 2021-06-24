@@ -5,11 +5,11 @@ import { ActionSheetController } from "@ionic/angular";
 import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
 import {architecturalStyles} from '../discover/discover.columns';
 @Component({
-  selector: "page-speaker-detail",
-  templateUrl: "speaker-detail.html",
-  styleUrls: ["./speaker-detail.scss"],
+  selector: "page-over-time-detail",
+  templateUrl: "over-time-detail.html",
+  styleUrls: ["./over-time-detail.scss"],
 })
-export class SpeakerDetailPage {
+export class overTimeDetailPage {
   speaker: any;
   buildings: any[] = [];
   show: boolean = false;

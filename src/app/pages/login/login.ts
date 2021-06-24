@@ -81,7 +81,7 @@ export class LoginPage {
           this.presentSuccessToast("You have successfully logged in");
           this.userData.login(this.login.email);
           this.userData.saveToLocalStorage(this.login.email, res.result);
-          this.router.navigateByUrl("/app/tabs/schedule");
+          this.router.navigateByUrl("/app/tabs/my-buildings");
         },
         (err) => {
           this.presentErrorToast(err.error);

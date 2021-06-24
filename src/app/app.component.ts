@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: "My Buildings",
-      url: "/app/tabs/schedule",
+      url: "/app/tabs/my-buildings",
       icon: "business",
       visible: false,
     },

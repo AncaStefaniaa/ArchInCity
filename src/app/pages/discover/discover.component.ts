@@ -1,6 +1,5 @@
 import { Component, ChangeDetectorRef, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ConferenceData } from "../../providers/conference-data";
 import {
   ActionSheetController,
   ToastController,
@@ -57,11 +56,9 @@ export class DiscoverPage implements OnInit {
   address: any;
 
   constructor(
-    private dataProvider: ConferenceData,
     private route: ActivatedRoute,
     public router: Router,
     public actionSheetCtrl: ActionSheetController,
-    public confData: ConferenceData,
     public inAppBrowser: InAppBrowser,
     public camera: Camera,
     public domSanitizer: DomSanitizer,
@@ -71,7 +68,7 @@ export class DiscoverPage implements OnInit {
     private toastController: ToastController,
     private platform: Platform,
     private geolocation: Geolocation,
-    public loadingController: LoadingController // private backgroundGeolocation: BackgroundGeolocation
+    public loadingController: LoadingController
   ) {}
 
   ngOnInit() {

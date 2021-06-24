@@ -7,10 +7,10 @@ import { TabsPageRoutingModule } from "./tabs-page-routing.module";
 
 import { AboutModule } from "../about/about.module";
 import { MapModule } from "../map/map.module";
-import { ScheduleModule } from "../schedule/schedule.module";
+import { myBuildingsModule } from "../my-buildings/my-buildings.module";
 import { SessionDetailModule } from "../session-detail/session-detail.module";
-import { SpeakerDetailModule } from "../speaker-detail/speaker-detail.module";
-import { SpeakerListModule } from "../speaker-list/speaker-list.module";
+import { overTimeDetailModule } from "../over-time-detail/over-time-detail.module";
+import { SpeakerListModule } from "../over-time/over-time.module";
 import { DiscoverModule } from "../discover/discover.module";
 import { DiscoverDetailsModule } from "../discover-details/discover-details.module";
 
@@ -20,9 +20,9 @@ import { DiscoverDetailsModule } from "../discover-details/discover-details.modu
     CommonModule,
     IonicModule,
     MapModule,
-    ScheduleModule,
+    myBuildingsModule,
     SessionDetailModule,
-    SpeakerDetailModule,
+    overTimeDetailModule,
     SpeakerListModule,
     TabsPageRoutingModule,
     DiscoverModule,

@@ -1,4 +1,4 @@
-export const myBuildings: any[] = [
+export const myBuildingsList: any[] = [
   {
     name: "Achaemenid",
     id: 0,

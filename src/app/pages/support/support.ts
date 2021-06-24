@@ -56,7 +56,7 @@ export class SupportPage {
         console.log(res);
         this.toastHelper.presentSuccessToast("Thanks for your feedback!");
         setTimeout(() => {
-          this.router.navigate(["./app/tabs/schedule"]);
+          this.router.navigate(["./app/tabs/my-buildings"]);
         }, 1000);
       },
       (err) => {

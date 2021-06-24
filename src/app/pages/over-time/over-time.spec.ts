@@ -4,7 +4,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { ActionSheetController } from '@ionic/angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { SpeakerListPage } from './speaker-list';
+import { SpeakerListPage } from './over-time';
 import { ConferenceData } from '../../providers/conference-data';
 
 const confDataSub = {};

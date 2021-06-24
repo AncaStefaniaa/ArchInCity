@@ -39,7 +39,6 @@ export class TabsPage {
 
   logout() {
     this.userData.logout().then(() => {
-      // return this.router.navigateByUrl("/app/tabs/schedule");
       console.log("loggedOut");
     });
   }

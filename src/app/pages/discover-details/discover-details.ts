@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { ConferenceData } from "../../providers/conference-data";
 import { ActionSheetController } from "@ionic/angular";
 import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
 import { architecturalStyles } from "../discover/discover.columns";
@@ -15,16 +14,12 @@ export class DiscoverDetailsPage {
   buildings: any[] = [];
   
   constructor(
-    private dataProvider: ConferenceData,
     private route: ActivatedRoute,
     public actionSheetCtrl: ActionSheetController,
-    public confData: ConferenceData,
     public inAppBrowser: InAppBrowser
   ) {}
 
   ionViewWillEnter() {
-    console.log(architecturalStyles);
-    this.dataProvider.load().subscribe((data: any) => {
       const speakerId = this.route.snapshot.paramMap.get("discoverId");
       for (const speaker of architecturalStyles) {
         if (speaker && speaker.id === parseInt(speakerId)) {
@@ -32,7 +27,6 @@ export class DiscoverDetailsPage {
           break;
         }
       }
-    });
   }
 
   openExternalUrl(url: string) {
@@ -73,7 +67,7 @@ export class DiscoverDetailsPage {
   }
 
   async openContact(speaker: any) {
-    const mode = "ios"; // this.config.get('mode');
+    const mode = "ios";
 
     const actionSheet = await this.actionSheetCtrl.create({
       header: "Contact " + speaker.name,

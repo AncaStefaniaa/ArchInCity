@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { TabsPage } from "./tabs-page";
-import { SchedulePage } from "../schedule/schedule";
-import { SpeakerListPage } from "../speaker-list/speaker-list";
+import { myBuildings } from "../my-buildings/my-buildings";
+import { SpeakerListPage } from "../over-time/over-time";
 const routes: Routes = [
   {
     path: "tabs",
@@ -14,7 +14,7 @@ const routes: Routes = [
           {
             path: "",
             loadChildren: () =>
-              import("../speaker-list/speaker-list.module").then(
+              import("../over-time/over-time.module").then(
                 (m) => m.SpeakerListModule
               ),
           },
@@ -26,20 +26,20 @@ const routes: Routes = [
               ),
           },
           {
-            path: "speaker-details/:speakerId",
+            path: "over-time-details/:speakerId",
             loadChildren: () =>
-              import("../speaker-detail/speaker-detail.module").then(
-                (m) => m.SpeakerDetailModule
+              import("../over-time-detail/over-time-detail.module").then(
+                (m) => m.overTimeDetailModule
               ),
           },
         ],
       },
       {
-        path: "schedule",
+        path: "my-buildings",
         children: [
           {
             path: "",
-            component: SchedulePage,
+            component: myBuildings,
           },
           {
             path: "session/:sessionId",

@@ -9,7 +9,7 @@ import {
 import { ConferenceData } from "../../providers/conference-data";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserData } from "../../providers/user-data";
-import { myBuildings } from "../schedule/gallery.columns";
+import { myBuildingsList } from "../my-buildings/gallery.columns";
 import { SessionDetailService } from "./session-detail.service";
 import {
   ToastController,
@@ -48,7 +48,7 @@ export class SessionDetailPage {
 
   async ionViewDidEnter() {
     this.presentLoadingPage();
-    this.defaultHref = `/app/tabs/schedule`;
+    this.defaultHref = `/app/tabs/my-buildings`;
 
     this.architecturalStyles = architecturalStyles;
     this.sessionDetailService.getAllImages().subscribe((res) => {
@@ -264,7 +264,7 @@ export class SessionDetailPage {
         (res) => {
           this.presentSuccessToast("Delete successful");
           setTimeout(() => {
-            this.router.navigate(["./app/tabs/schedule"]);
+            this.router.navigate(["./app/tabs/my-buildings"]);
           }, 1000);
         },
         (err) => {
