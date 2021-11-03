@@ -22,7 +22,7 @@ export class AccountPage implements AfterViewInit {
   username: string;
   userId;
   email: string;
-  accountPhoto: string = "../../../assets/img/user.jpeg";
+  accountPhoto: string = "../../../assets/img/user.png";
 
   constructor(
     public alertCtrl: AlertController,
@@ -32,7 +32,7 @@ export class AccountPage implements AfterViewInit {
     private accountService: AccountService,
     private toastHelper: ToastHelper,
     private loadingHelper: LoadingHelper,
-    public camera: Camera,
+    public camera: Camera
   ) {}
 
   ngAfterViewInit() {
@@ -41,12 +41,13 @@ export class AccountPage implements AfterViewInit {
   }
 
   getUserPhoto() {
-      this.accountService.getUserPicture(this.userId).subscribe((res) =>{
-        if(res["result"].profile_photo){
-          this.accountPhoto = res["result"].profile_photo;
-        }
-      })
+    this.accountService.getUserPicture(this.userId).subscribe((res) => {
+      if (res["result"].profile_photo) {
+        this.accountPhoto = res["result"].profile_photo;
+      }
+    });
   }
+
   async changeUsername() {
     const alert = await this.alertCtrl.create({
       header: "Change Username",
@@ -89,15 +90,22 @@ export class AccountPage implements AfterViewInit {
         {
           text: "Ok",
           handler: (data: any) => {
-            this.loadingHelper.presentLoading(300);
-            this.accountService.changePassword(data).subscribe(
-              (res) => {
-                this.toastHelper.presentSuccessToast("Yey. A link has been!");
-              },
-              (err) => {
-                this.toastHelper.presentErrorToast("Error");
-              }
-            );
+            let validEmail = JSON.parse(
+              localStorage.getItem("userData")
+            ).username;
+            if (validEmail == data) {
+              this.loadingHelper.presentLoading(300);
+              this.accountService.changePassword(data).subscribe(
+                (res) => {
+                  this.toastHelper.presentSuccessToast("Yey. A link has been!");
+                },
+                (err) => {
+                  this.toastHelper.presentErrorToast("Error");
+                }
+              );
+            } else {
+              this.toastHelper.presentErrorToast("Email is not valid");
+            }
           },
         },
       ],
@@ -119,7 +127,12 @@ export class AccountPage implements AfterViewInit {
   }
 
   support() {
-    this.router.navigateByUrl("/support");
+    let isAdmin = JSON.parse(localStorage.getItem("userData")).isAdmin;
+    if(isAdmin){
+      this.router.navigateByUrl("/see-feedback");
+    }else{
+      this.router.navigateByUrl("/support");
+    }
   }
 
   async presentToast(text) {
@@ -131,8 +144,7 @@ export class AccountPage implements AfterViewInit {
     toast.present();
   }
 
-    updatePicture(sourceType: PictureSourceType) {
-
+  updatePicture(sourceType: PictureSourceType) {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -145,10 +157,10 @@ export class AccountPage implements AfterViewInit {
 
     this.camera.getPicture(options).then((imageData) => {
       console.log(imageData);
-      this.accountService.updatePicture(imageData).subscribe((res) =>{
+      this.accountService.updatePicture(imageData).subscribe((res) => {
         console.log(res);
         this.accountPhoto = res["result"];
-      })
+      });
     });
   }
 }

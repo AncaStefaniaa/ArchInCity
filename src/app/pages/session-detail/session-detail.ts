@@ -5,8 +5,6 @@ import {
   Inject,
   AfterViewInit,
 } from "@angular/core";
-
-import { ConferenceData } from "../../providers/conference-data";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserData } from "../../providers/user-data";
 import { myBuildingsList } from "../my-buildings/gallery.columns";
@@ -36,7 +34,6 @@ export class SessionDetailPage {
 
   constructor(
     @Inject(DOCUMENT) private doc: Document,
-    private dataProvider: ConferenceData,
     private userProvider: UserData,
     private route: ActivatedRoute,
     private sessionDetailService: SessionDetailService,
@@ -69,9 +66,6 @@ export class SessionDetailPage {
     const appEl = this.doc.querySelector("ion-app");
     let isDark = false;
     let style = [];
-    // if (appEl.classList.contains("dark-theme")) {
-    //   style = darkStyle;
-    // }
 
     const googleMaps = await getGoogleMaps(
       "AIzaSyDUi5qVkVuZo1yhMWgSMOubk4igV53Jsyc"
@@ -130,10 +124,6 @@ export class SessionDetailPage {
     observer.observe(appEl, {
       attributes: true,
     });
-  }
-
-  async ngAfterViewInit() {
-    // this.constructMap();
   }
 
   sessionClick(item: string) {

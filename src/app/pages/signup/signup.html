@@ -22,15 +22,16 @@
           type="text"
           #username="ngModel"
           required
+          minlength="4"
         >
         </ion-input>
       </ion-item>
       <ion-text color="danger">
         <p
           [hidden]="username.valid || submitted == false"
-          class="ion-padding-start"
+          class="ion-padding-start text-alert"
         >
-          Username is required
+          Username is required and it must have at least 4 caracters
         </p>
       </ion-text>
 
@@ -42,15 +43,22 @@
           type="text"
           #email="ngModel"
           required
+          email
         >
         </ion-input>
       </ion-item>
       <ion-text color="danger">
         <p
-          [hidden]="email.valid || submitted == false"
-          class="ion-padding-start"
+          [hidden]="email.valid || submitted == false || email.errors?.email"
+          class="ion-padding-start text-alert"
         >
           Email is required
+        </p>
+        <p
+          [hidden]="!email.errors?.email || submitted == false"
+          class="ion-padding-start text-alert"
+        >
+          Email is not valid
         </p>
       </ion-text>
 
@@ -62,15 +70,27 @@
           type="password"
           #password="ngModel"
           required
+          minlength="8"
+          validPassword
+          pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$"
         >
         </ion-input>
       </ion-item>
       <ion-text color="danger">
         <p
-          [hidden]="password.valid || submitted == false"
-          class="ion-padding-start"
+          [hidden]="password.valid || submitted == false || password.errors?.pattern"
+          class="ion-padding-start text-alert"
         >
           Password is required
+        </p>
+      </ion-text>
+      <ion-text color="danger">
+        <p
+          [hidden]="!password.errors?.pattern || submitted == false"
+          class="ion-padding-start text-alert"
+        >
+          Password must contain at least 8 caracters, at least one upper case,
+          at least one number
         </p>
       </ion-text>
     </ion-list>

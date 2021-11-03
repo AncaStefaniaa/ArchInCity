@@ -1,16 +1,14 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { PopoverController } from '@ionic/angular';
-
-import { PopoverPage } from '../about-popover/about-popover';
+import { PopoverController } from "@ionic/angular";
 
 @Component({
-  selector: 'page-about',
-  templateUrl: 'about.html',
-  styleUrls: ['./about.scss'],
+  selector: "page-about",
+  templateUrl: "about.html",
+  styleUrls: ["./about.scss"],
 })
 export class AboutPage {
-  app = 'archSmarter';
+  app = "archSmarter";
 
-  constructor(public popoverCtrl: PopoverController) { }
+  constructor() {}
 }

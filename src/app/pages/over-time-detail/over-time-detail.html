@@ -4,34 +4,22 @@
       <ion-buttons slot="start">
         <ion-back-button defaultHref="/app/tabs/over-time"></ion-back-button>
       </ion-buttons>
-      <ion-buttons *ngIf="speaker" slot="end">
-        <ion-button (click)="openSpeakerShare(speaker)">
-          <ion-icon
-            slot="icon-only"
-            ios="share-outline"
-            md="share-sharp"
-          ></ion-icon>
-        </ion-button>
-      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
-  <!-- <div class="speaker-background"> -->
   <img [src]="speaker?.image" [alt]="speaker?.name" />
   <h2 class="content-title">{{speaker?.name}}</h2>
-  <!-- </div> -->
   <div class="ion-padding over-time-detail">
     <p [class.show]="show" class="style-details">{{speaker?.about}}</p>
     <a *ngIf="show" (click)="show = !show" class="show-button">Show less</a>
-    <a *ngIf="!show" (click)="show = !show" class="show-button">... Show more</a>
+    <a *ngIf="!show" (click)="show = !show" class="show-button"
+      >... Show more</a
+    >
     <h4 size="12" class="album-info">Main style characteristics</h4>
-        <ion-chip
-          *ngFor="let ch of speaker?.characteristics"
-          color="medium"
-        >
-          <ion-icon name="brush" color="dark"></ion-icon>
-          <ion-label>{{ch}}</ion-label>
-        </ion-chip>
+    <ion-chip *ngFor="let ch of speaker?.characteristics" color="medium">
+      <ion-icon name="brush" color="dark"></ion-icon>
+      <ion-label>{{ch}}</ion-label>
+    </ion-chip>
     <h4>Origins</h4>
     <div class="origins-chips">
       <ion-chip color="warning">
@@ -42,18 +30,20 @@
         <ion-icon name="globe" color="dark"></ion-icon>
         <ion-label>{{speaker?.origins[1]}}</ion-label>
       </ion-chip>
-</div>
+    </div>
     <hr />
+
     <ion-chip
       class="content-chip"
       color="dark"
       button
-      (click)="openExternalUrl('https://en.wikipedia.org/wiki/Achaemenid_architecture')"
-    > 
-    <div class="chip-content">
-      <ion-icon name="logo-buffer"></ion-icon>
-      <ion-label class="wiki-label">Wikipedia</ion-label>
-    </div>
+      (click)="openExternalUrl()"
+    >
+      <div class="chip-content">
+        <ion-icon name="logo-buffer"></ion-icon>
+        <ion-label class="wiki-label">Wikipedia</ion-label>
+      </div>
     </ion-chip>
+
   </div>
 </ion-content>

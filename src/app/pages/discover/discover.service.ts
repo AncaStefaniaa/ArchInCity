@@ -35,7 +35,7 @@ export class DiscoverService {
     var options = { content: formData };
 
     return this.httpClient.post<any>(
-      "http://192.168.1.193:3000/arch_recognition",
+      "http://20.86.155.16:3333/arch_recognition",
       formData
     );
   }
@@ -77,7 +77,7 @@ export class DiscoverService {
     var options = { content: formData };
 
     return this.httpClient.post<any>(
-      "http://192.168.1.193:3000/add_image",
+      "http://20.86.155.16:3333/add_image",
       formData
     );
   }

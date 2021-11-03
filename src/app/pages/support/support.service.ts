@@ -18,9 +18,6 @@ export class FeedbackService {
       userId: userData.userId,
       feedback: formData,
     };
-    return this.httpClient.post(
-      "http://192.168.1.193:3000/send_feedback",
-      body
-    );
+    return this.httpClient.post("http://20.86.155.16:3333/send_feedback", body);
   }
 }

@@ -82,6 +82,16 @@ ion-toolbar ion-menu-button {
 .content-title {
   text-align: center;
 }
+
 .content-chip {
   text-align: center;
+  display: flex;
+}
+
+.wiki-label{
+  margin-left:3px;
+}
+
+.chip-content{
+  margin: auto;
 }

@@ -123,7 +123,7 @@ export const architecturalStyles: any[] = [
       "https://media.architecturaldigest.com/photos/585abd711f906f61574e60ad/16:9/w_2287,h_1286,c_limit/gothic-cathedrals-06.jpg",
   },
   {
-    name: "Neoclasical",
+    name: "Neoclassical",
     id: 9,
     about:
       "Neoclassical architecture is an architectural style produced by the Neoclassical movement that began in the mid-18th century in Italy and France which then became one of the most prominent and iconic architectural styles in the Western World.n form, Neoclassical architecture emphasizes the wall rather than chiaroscuro and maintains separate identities to each of its parts. The style is manifested both in its details as a reaction against the Rococo style of naturalistic ornament, and in its architectural formulae as an outgrowth of some classicising features of the Late Baroque architectural tradition. Therefore, the style is defined by symmetry, simple geometry, and social demands instead of ornament. The classical architecture of today's architects must come under the heading of New Classicism.",
@@ -196,14 +196,14 @@ export const architecturalStyles: any[] = [
     image:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Ascott_House.jpg/450px-Ascott_House.jpg",
   },
-  {
-    name: "No architecture",
-    id: 15,
-    about: "No architecture",
-    origins: ["No architecture"],
-    characteristics: ["No architecture"],
-    wikipedia: "No architecture",
-    image:
-      "http://www.hibamagazine.com/wp-content/uploads/2017/08/Art-of-saying-No.jpg",
-  },
+  // {
+  //   name: "No architecture",
+  //   id: 15,
+  //   about: "No architecture",
+  //   origins: ["No architecture"],
+  //   characteristics: ["No architecture"],
+  //   wikipedia: "No architecture",
+  //   image:
+  //     "http://www.hibamagazine.com/wp-content/uploads/2017/08/Art-of-saying-No.jpg",
+  // },
 ];

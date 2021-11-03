@@ -13,6 +13,6 @@ export class SeeFeedbackService {
   ) {}
 
   getFeedback() {
-    return this.httpClient.get("http://192.168.1.193:3000/get_feedback");
+    return this.httpClient.get("http://20.86.155.16:3333/get_feedback");
   }
 }

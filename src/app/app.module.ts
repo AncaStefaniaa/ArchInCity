@@ -18,6 +18,7 @@ import { WebView } from "@ionic-native/ionic-webview/ngx";
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite/ngx";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 // import { BackgroundGeolocation } from "@ionic-native/background-geolocation/ngx";
+import { PasswordDirective } from "./providers/email-validator.directive";
 @NgModule({
   imports: [
     BrowserModule,
@@ -30,7 +31,7 @@ import { Geolocation } from "@ionic-native/geolocation/ngx";
       enabled: environment.production,
     }),
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, PasswordDirective],
   providers: [
     InAppBrowser,
     SplashScreen,
@@ -41,6 +42,7 @@ import { Geolocation } from "@ionic-native/geolocation/ngx";
     SQLite,
     Geolocation,
   ],
+  exports: [PasswordDirective],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -151,7 +151,6 @@ export class DiscoverPage implements OnInit {
     const loading = await this.loadingController.create({
       cssClass: "my-custom-class",
       message: "Please wait...",
-      duration: 3000,
       translucent: true,
     });
     await loading.present();
@@ -171,9 +170,9 @@ export class DiscoverPage implements OnInit {
     };
 
     this.camera.getPicture(options).then((imageData) => {
+      this.presentLoading();
       this.discoverService.findStyle(imageData).subscribe(
         (res) => {
-          this.presentLoading();
           this.buildingStyle = parseInt(res["arch"]);
           if (this.buildingStyle != 15) {
             this.discoverService
@@ -187,6 +186,7 @@ export class DiscoverPage implements OnInit {
               .subscribe(
                 (res) => {
                   console.log(res);
+                  
                 },
                 (err) => {
                   console.log(err);
@@ -195,11 +195,15 @@ export class DiscoverPage implements OnInit {
 
             setTimeout(() => {
               this.populateCurrentBuildingStyle();
-            }, 3000);
+              this.loadingController.dismiss();
+            }, 1000);
+
           } else {
             setTimeout(() => {
+              this.loadingController.dismiss();
               this.presentToast("No architecture found. Please try again.");
-            }, 3000);
+            }, 1000);
+
           }
         },
         (err) => {

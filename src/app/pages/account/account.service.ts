@@ -14,14 +14,16 @@ export class AccountService {
   ) {}
 
   getUserPicture(userId) {
-    return this.httpClient.get("http://192.168.1.193:3000/get_user_info",{ params: {
+    return this.httpClient.get("http://20.86.155.16:3333/get_user_info", {
+      params: {
         userId: userId,
-      }})
+      },
+    });
   }
 
   changePassword(email) {
     return this.httpClient.post(
-      "http://192.168.1.193:3000/reset_password",
+      "http://20.86.155.16:3333/reset_password",
       email
     );
   }
@@ -40,7 +42,7 @@ export class AccountService {
     return blob;
   }
 
-  updatePicture(imageData){
+  updatePicture(imageData) {
     const date = new Date().valueOf();
     const imageName = date + ".jpeg";
 
@@ -57,8 +59,10 @@ export class AccountService {
     formData.append("userId", userData.userId);
     console.log(formData);
     var options = { content: formData };
-    return this.httpClient.post("http://192.168.1.193:3000/change_photo", formData);
-
+    return this.httpClient.post(
+      "http://20.86.155.16:3333/change_photo",
+      formData
+    );
   }
 
   findStyle(imageData) {
@@ -74,9 +78,8 @@ export class AccountService {
     var options = { content: formData };
 
     return this.httpClient.post<any>(
-      "http://192.168.1.193:3000/arch_recognition",
+      "http://20.86.155.16:3333/arch_recognition",
       formData
     );
   }
-
 }

@@ -8,7 +8,6 @@ import {
   ToastController,
   Config,
 } from "@ionic/angular";
-import { ConferenceData } from "../../providers/conference-data";
 import { UserData } from "../../providers/user-data";
 import { architecturalStyles } from "../discover/discover.columns";
 import { myBuildingsList } from "./gallery.columns";
@@ -44,7 +43,6 @@ export class myBuildings implements OnInit {
 
   constructor(
     public alertCtrl: AlertController,
-    public confData: ConferenceData,
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     public router: Router,

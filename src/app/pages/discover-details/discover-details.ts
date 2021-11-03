@@ -29,8 +29,8 @@ export class DiscoverDetailsPage {
       }
   }
 
-  openExternalUrl(url: string) {
-    this.inAppBrowser.create(this.speaker, "_blank");
+  openExternalUrl() {
+    this.inAppBrowser.create(this.speaker.wikipedia, "_blank");
   }
 
   async openSpeakerShare(speaker: any) {

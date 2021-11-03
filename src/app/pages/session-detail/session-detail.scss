@@ -86,11 +86,11 @@ h1 {
 }
 
 .session-image {
-  width: 118% !important;
-  height: 400px;
-  margin-top: -20px;
-  margin-left: -30px;
-  max-width: 130%;
+  // width: 118% !important;
+  // height: 400px;
+  // margin-top: -20px;
+  // margin-left: -30px;
+  // max-width: 130%;
 }
 
 .map-canvas {
@@ -132,20 +132,20 @@ ion-content {
   --padding-top: 40vh !important;
 }
 
-.question{
-  font-weight:100!important;
-  margin-left:12px!important;
-  font-size:13px;
+.question {
+  font-weight: 100 !important;
+  margin-left: 12px !important;
+  font-size: 13px;
 }
 
-.about{
-  text-align:justify;
-  font-weight:100!important;
-  font-size:13px;
+.about {
+  text-align: justify;
+  font-weight: 100 !important;
+  font-size: 13px;
   line-height: 16px;
   height: 32px;
   overflow: hidden;
-  margin-bottom:0px;
+  margin-bottom: 0px;
   margin-right: 20px;
 }
 
@@ -154,11 +154,11 @@ ion-content {
   height: auto;
 }
 
-.show-button{
-  font-size:13px!important;
-  font-weight:500!important;
-  margin-top:0px;
-  --color:var(dark)!important;
+.show-button {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  margin-top: 0px;
+  --color: var(dark) !important;
 }
 
 .location-container {
@@ -171,4 +171,12 @@ ion-content {
   display: flex;
   justify-content: center;
   margin-left: -30px;
+}
+
+.show-button {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  margin-top: 0px;
+  --color: var(dark) !important;
+  margin-left: 5px;
 }

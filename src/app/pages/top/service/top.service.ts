@@ -13,17 +13,15 @@ export class TopService {
   ) {}
 
   getTop() {
-
-
-    return this.httpClient.get("http://192.168.1.193:3000/shared_photos");
+    return this.httpClient.get("http://20.86.155.16:3333/shared_photos");
   }
 
-  addLike(userId, photoId){
+  addLike(userId, photoId) {
     let body = {
       userId: userId,
-      photoId: photoId
+      photoId: photoId,
     };
-    
-    return this.httpClient.post("http://192.168.1.193:3000/vote_photo", body);
+
+    return this.httpClient.post("http://20.86.155.16:3333/vote_photo", body);
   }
 }
